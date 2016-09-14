@@ -50,7 +50,6 @@ if dein#load_state(s:dein_dir)
         \     'unix' : 'gmake',
         \    }
         \ })
-
   call dein#add( 'jpo/vim-railscasts-theme')
   call dein#add( 'cohama/vim-smartinput-endwise')
   call dein#add( 'LeafCage/yankround.vim')
@@ -124,7 +123,10 @@ if dein#load_state(s:dein_dir)
         \}}
         \)
   " 設定終了
-  call dein#add( 'scrooloose/syntastic')
+  " call dein#add( 'scrooloose/syntastic')
+  call dein#add( "osyo-manga/shabadou.vim")
+  call dein#add( "osyo-manga/vim-watchdogs")
+  call dein#add( "jceb/vim-hier")
   call dein#end()
   call dein#save_state()
 endif
@@ -166,10 +168,6 @@ set completeopt+=menuone
 set autoindent
 set smartindent
 set conceallevel=0
-
-filetype plugin indent on
-syntax on
-
 
 
 let g:vim_json_syntax_conceal = 0
@@ -470,28 +468,21 @@ nnoremap <Leader>v :VimFilerExplorer<CR>
 
 "クイックラン設定
 let g:quickrun_config = {}
-let g:quickrun_config['html'] = {
-      \'command' : 'open',
-      \'exec' : '%c %s',
-      \'outputter': 'browser'
-      \}
 
+"watch dogs 設定
+let g:watchdogs_check_BufWritePost_enable = 1
+let g:watchdogs_check_CursorHold_enable = 1
+let g:quickrun_config = {
+\   "javascript/watchdogs_checker" : {
+\     "type" : "eslint"
+\   }
+\ }
 
-"syntastic 設定
-" ここから下は Syntastic のおすすめの設定
-" ref. https://github.com/scrooloose/syntastic#settings
+let g:quickrun_config["ruby/watchdogs_checker"] = {
+	\	"type" : "rubocop"
+	\}
 
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'active',
-            \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss'] }
-let g:syntastic_ruby_checkers = ['rubocop'] " or ['rubocop', 'mri']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_coffee_checkers = ['coffeelint']
-let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_check_on_wq = 0
+call watchdogs#setup(g:quickrun_config)
 "emmet 設定
 let g:user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
@@ -554,21 +545,13 @@ let g:user_emmet_settings = {
       \    },
       \}
 
-" clang 設定
-" let g:clang_c_options = '-std=c11'
-" let g:clang_cpp_options = '-std=c++1z -stdlib=libc++ --pedantic-errors'
 colorscheme railscasts
 
-let g:neobundle#log_filename = $HOME . "/neobundle.log"
 "カスタム設定
-inoremap <Leader><Leader> :tabnew<CR>
 inoremap <C-j> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 nnoremap <C-]> g<C-]>
-nmap con :Econtroller<CR>
-nmap model :Emodel<CR>
-nmap test :A<CR>
 nmap <C-t> :tabNext<CR>
 nmap <C-e> :tabnew<CR>
 nmap gs :Gstatus<CR>
@@ -578,13 +561,7 @@ nmap gd :Gdiff<CR>
 nmap gb :Gblame<CR>
 nnoremap * *vey
 cnoremap <C-p> <C-r>"
-" imap <C-j> <esc>
-" vmap <C-j> <esc>
-" function! ZenkakuSpace()
-"   highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#fffff
-" endfunction
 highlight CursorLine term=reverse cterm=reverse
-" autocmd BufNewFile,BufRead * match ZenkakuSpace /　/
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
