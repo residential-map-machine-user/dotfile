@@ -11,6 +11,7 @@ alias re="source  $HOME/.bash_profile"
 alias vi="vim"
 alias eclimd="$ECLIPSE_HOME/eclimd"
 alias rake="bundle exec rake"
+alias paraview="/Applications/paraview.app/Contents/MacOS/paraview"
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/yukimatsuyama/.gvm/bin/gvm-init.sh" ]] && source "/Users/yukimatsuyama/.gvm/bin/gvm-init.sh"
 

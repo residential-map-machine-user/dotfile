@@ -123,7 +123,7 @@ if dein#load_state(s:dein_dir)
         \}}
         \)
   " 設定終了
-  " call dein#add( 'scrooloose/syntastic')
+  call dein#add( 'scrooloose/syntastic')
   call dein#add( "osyo-manga/shabadou.vim")
   call dein#add( "osyo-manga/vim-watchdogs")
   call dein#add("osyo-manga/vim-precious")
@@ -422,7 +422,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " vimshell 設定
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 imap <silent> <C-q> <Plug>(vimshell_exit)
-nnoremap <silent> vp :<C-u>VimShell<CR>
+nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
 nmap <silent> vs :<C-u>VimShellPop<CR>
 
 "JsDoc設定
