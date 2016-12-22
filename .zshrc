@@ -9,12 +9,13 @@ alias toms=$HOME/tomcat7/bin/startup.sh
 alias tomf=$HOME/tomcat7/bin/shutdown.sh
 alias re="source  $HOME/.bash_profile"
 alias vi="vim"
+alias py="python3"
 alias eclimd="$ECLIPSE_HOME/eclimd"
 alias rake="bundle exec rake"
 alias paraview="/Applications/paraview.app/Contents/MacOS/paraview"
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/yukimatsuyama/.gvm/bin/gvm-init.sh" ]] && source "/Users/yukimatsuyama/.gvm/bin/gvm-init.sh"
-
+export PYENV_ROOT="$HOME/.pyenv"
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT=/Users/yukimatsuyama/Downloads/cocos2d-x-3.8/tools/cocos2d-console/bin
 export PATH=$COCOS_CONSOLE_ROOT:$PATH
