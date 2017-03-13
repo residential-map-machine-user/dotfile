@@ -1,18 +1,19 @@
 alias vi=/usr/local/bin/vim
+alias interval="defaults write org.eyebeam.SelfControl BlockDuration -int 450"
+alias block="sudo /Applications/SelfControl.app/Contents/MacOS/org.eyebeam.SelfControl $(id -u $(whoami)) --install"
 alias rake erd="rake erd --attributes=foreign_keys,primary_keys,content,timestamp --filename=erd_sample --filetype=png"
 alias gla="git lga"
+alias sengoku="ssh test@192.168.2.217" 
+alias uesugi="ssh process@192.168.2.74"
 ECLIPSE_HOME=/Applications/Eclipse.app/Contents/Eclipse
 export ECLIPSE_HOME
-PATH=$HOME/android-ndk-r10e:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools:$GRADLE_HOME/bin:$HOME/.nodebrew/current/bin:/usr/local/bin:$PATH
-export PATH
 alias toms=$HOME/tomcat7/bin/startup.sh
 alias tomf=$HOME/tomcat7/bin/shutdown.sh
 alias re="source  $HOME/.bash_profile"
 alias vi="vim"
-alias py="python3"
+alias py="python"
 alias eclimd="$ECLIPSE_HOME/eclimd"
 alias rake="bundle exec rake"
-alias paraview="/Applications/paraview.app/Contents/MacOS/paraview"
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/yukimatsuyama/.gvm/bin/gvm-init.sh" ]] && source "/Users/yukimatsuyama/.gvm/bin/gvm-init.sh"
 export PYENV_ROOT="$HOME/.pyenv"
@@ -32,11 +33,7 @@ export PATH=$NDK_ROOT:$PATH
 export ANDROID_SDK_ROOT=/Users/yukimatsuyama/Library/Android/sdk
 export PATH=$ANDROID_SDK_ROOT:$PATH
 export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
-
-# Add environment variable ANT_ROOT for cocos2d-x
-export ANT_ROOT=/Applications/Cocos/tools/ant/bin
-export PATH=$ANT_ROOT:$PATH
-export PATH="/usr/local/sbin:$PATH"
+# Add environment variable ANT_ROOT for cocos2d-x export ANT_ROOT=/Applications/Cocos/tools/ant/bin export PATH=$ANT_ROOT:$PATH export PATH="/usr/local/sbin:$PATH"
 
 # Add environment variable COCOS_FRAMEWORKS for cocos2d-x
 export COCOS_FRAMEWORKS=/Applications/Cocos/frameworks
@@ -127,3 +124,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(rbenv init -)"
+eval "$(pyenv init -)"
+PATH=$PYENV_ROOT/bin:HOME/.pyenv/shims:HOME/android-ndk-r10e:$HOME/Library/Android/sdk/platform-tools:$HOME/Library/Android/sdk/tools:$GRADLE_HOME/bin:$HOME/.nodebrew/current/bin:$PATH
+export PATH
+export DRONE_SERVER=http://drone.mycompany.com
+export DRONE_TOKEN=...
