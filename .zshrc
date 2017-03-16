@@ -3,6 +3,7 @@ alias interval="defaults write org.eyebeam.SelfControl BlockDuration -int 450"
 alias block="sudo /Applications/SelfControl.app/Contents/MacOS/org.eyebeam.SelfControl $(id -u $(whoami)) --install"
 alias rake erd="rake erd --attributes=foreign_keys,primary_keys,content,timestamp --filename=erd_sample --filetype=png"
 alias gla="git lga"
+alias server="ruby -rwebrick -e 'WEBrick::HTTPServer.new(:DocumentRoot => "./", :Port => 8000).start'"
 alias sengoku="ssh test@192.168.2.217" 
 alias uesugi="ssh process@192.168.2.74"
 ECLIPSE_HOME=/Applications/Eclipse.app/Contents/Eclipse
