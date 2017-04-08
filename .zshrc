@@ -130,3 +130,5 @@ PATH=$PYENV_ROOT/bin:HOME/.pyenv/shims:HOME/android-ndk-r10e:$HOME/Library/Andro
 export PATH
 export DRONE_SERVER=http://drone.mycompany.com
 export DRONE_TOKEN=...
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOPATH/bin
