@@ -474,15 +474,15 @@ let g:quickrun_config = {}
 "watch dogs 設定
 let g:watchdogs_check_BufWritePost_enable = 1
 let g:watchdogs_check_CursorHold_enable = 1
-let g:quickrun_config = {
-\   "javascript/watchdogs_checker" : {
-\     "type" : "eslint"
-\   }
-\ }
+" let g:quickrun_config = {
+" \   "javascript/watchdogs_checker" : {
+" \     "type" : "eslint"
+" \   }
+" \ }
 
-let g:quickrun_config["ruby/watchdogs_checker"] = {
-	\	"type" : "rubocop"
-	\}
+" let g:quickrun_config["ruby/watchdogs_checker"] = {
+" 	\	"type" : "rubocop"
+" 	\}
 
 call watchdogs#setup(g:quickrun_config)
 "emmet 設定
