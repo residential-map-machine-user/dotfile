@@ -132,3 +132,5 @@ export DRONE_SERVER=http://drone.mycompany.com
 export DRONE_TOKEN=...
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
+export PATH="/Users/yukimatsuyama/.phpenv/bin:$HOME/.composer/vendor/bin:$PATH"
+eval "$(phpenv init -)"
