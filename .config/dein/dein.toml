@@ -1,0 +1,83 @@
+[[plugins]] #deinを改めてプラグインとして使用する
+repo = 'Shougo/dein.vim' 
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+
+[[plugins]]#denite
+repo = 'Shougo/denite.nvim'
+depends = ['neomru.vim']
+
+[[plugins]]#denite
+repo = 'Shougo/neco-vim'
+depends = ['deoplete.vim']
+
+[[plugins]]#denite
+repo = 'zchee/deoplete-go'
+depends = ['deoplete.vim']
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+#[[plugins]] #??????? OS 依存性あり、特にwindowsは注意
+#repo = 'Shougo/vimproc.vim' 
+
+[[plugins]] #vim-smartinupt とvim-endwiseを合わせた、conflictの危険あり
+repo = 'cohama/vim-smartinput-endwise'
+
+[[plugins]] #denite のソース
+repo = 'Shougo/neomru.vim'
+
+[[plugins]] #denite のソース
+repo = 'Shougo/neoyank.vim'
+
+[[plugins]] #vim color scheme TODO カラースキームの変更
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]] #windowないの文字列検索 TODO incsearchとの連携 https://github.com/easymotion/vim-easymotion
+repo = 'easymotion/vim-easymotion'
+
+[[plugins]] #smart input TODO 要カスタマイズ
+repo = 'kana/vim-smartinput'
+
+[[plugins]] #visualモードで選択しているものを囲むもしくは削除するため
+repo = 'tpope/vim-surround'
+
+[[plugins]] #コメントを行う
+repo = 'tpope/vim-commentary'
+
+[[plugins]] #下部のバーにrepositoryを表示してくれる
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] #git diff を表示する
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]] #git diff を表示する
+repo = 'tpope/vim-fugitive'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+
+[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
