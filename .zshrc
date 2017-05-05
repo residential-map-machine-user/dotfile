@@ -8,8 +8,15 @@ alias server="ruby -rwebrick -e 'WEBrick::HTTPServer.new(:DocumentRoot => \"./\"
 alias vim=nvim
 
 #zshの設定
-ZSH_THEME="agnoster"
 plugins=(git)
+#schemeの設定
+source  ~/powerlevel9k/powerlevel9k.zsh-theme
+# 以下はお好みでカスタマイズ！
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(time context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status rbenv)
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 
 #環境変数
 export GOPATH=$HOME/.go
