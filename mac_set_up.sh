@@ -67,3 +67,12 @@ git clone https://github.com/powerline/fonts.git ~/fonts
 #TODO ngrokのinstall 
 
 #TODO postgresqlのinstall
+
+#TODO make command is needed
+
+#TODO if exists skip
+git clone https://github.com/drone/drone.git $GOPATH/src/github.com/drone/drone
+cd $GOPATH/src/github.com/drone/drone
+make deps
+make gen
+make build_static
