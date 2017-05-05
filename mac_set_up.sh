@@ -63,3 +63,7 @@ git clone https://github.com/powerline/fonts.git ~/fonts
 #TODO xcodeのcommand line toolsをinstall
 
 #TODO System integrity Protection の無効化 /usr/localの作成に必要だったりする`csrutil status`
+
+#TODO ngrokのinstall 
+
+#TODO postgresqlのinstall
