@@ -16,9 +16,13 @@ depends = ['neomru.vim']
 repo = 'Shougo/neco-vim'
 depends = ['deoplete.vim']
 
-[[plugins]]#denite
-repo = 'zchee/deoplete-go'
+[[plugins]]#denite git source 
+repo = 'Shougo/neco-vim'
 depends = ['deoplete.vim']
+
+[[plugins]]#denite
+repo = 'chemzqm/denite-git'
+depends = ['denite.vim']
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
