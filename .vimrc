@@ -17,9 +17,7 @@ if &runtimepath !~# '/dein.vim'
     if !isdirectory(s:dein_repo_dir)
         call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
     endif
-
-    " dein.vim をプラグインとして読み込む
-    execute 'set runtimepath^=' . s:dein_repo_dir
+" dein.vim をプラグインとして読み込む execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 
 if dein#load_state(s:dein_cache_dir)
@@ -93,10 +91,6 @@ set conceallevel=0
 set completeopt+=noselect
 set completeopt+=noinsert
 
-" html5設定
-let g:emmet_html5 = 1
-
-
 "deocompleteの設定
 "TODO denite のsnippetsの設定を行う
 
@@ -123,46 +117,12 @@ function! MyGitGutter()
 endfunction
 
 "easy motionの設定　
-nmap s <Plug>(easymotion-s2)
-map  / <Plug>(easymotion-sn)
+nmap  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
 " vimshell 設定
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-imap <silent> <C-q> <Plug>(vimshell_exit)
 nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
-nmap <silent> vs :<C-u>VimShellPop<CR>
-
-"let g:user_emmet_leader_key = '<C-e>'
-let g:user_emmet_settings = {
-      \    'variables' : {
-      \        'lang' : 'ja',
-      \    },
-      \    'html' : {
-      \        'filters' : 'html',
-      \        'indentation' : '  ',
-      \        'expandos' : {
-      \            'ol': 'ol>li',
-      \            'list': 'ul>li*3',
-      \        },
-      \        'default_attributes': {
-      \            'a': {'href': ''},
-      \            'link': [{'rel': 'stylesheet'}, {'href': ''}],
-      \        },
-      \        'empty_elements': 'area,base,basefont,...,isindex,link,meta,...',
-      \        'block_elements': 'address,applet,blockquote,...,li,link,map,...',
-      \        'inline_elements': 'a,abbr,acronym,...',
-      \        'empty_element_suffix': ' />',
-      \    },
-      \    'php' : {
-      \        'extends' : 'html',
-      \        'filters' : 'html,c',
-      \    },
-      \    'css' : {
-      \        'filters' : 'fc',
-      \    },
-      \}
-
 
 "vimfilerの設定
 let g:vimfiler_as_default_explorer  = 1
@@ -171,6 +131,8 @@ let g:vimfiler_safe_mode_by_default = 0
 " nnoremap <silent><C-u><C-j> :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit -toggle<CR>
 nnoremap <Leader>v :VimFilerExplorer<CR>
 
+
+imap   <C-e>, <plug>(emmet-expand-abbr)
 
 
 
@@ -182,9 +144,9 @@ autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
 
 "plugin 用のkey map
-nmap gs :Gstatus<CR>
-nmap ga :Gwrite<CR>
-nmap gco :Gcommit<CR>
-nmap gd :Gdiff<CR>
-nmap gb :Gblame<CR>
+nnoremap gs :Gstatus<CR>
+nnoremap ga :Gwrite<CR>
+nnoremap gco :Gcommit<CR>
+nnoremap gd :Gdiff<CR>
+nnoremap gb :Gblame<CR>
 
