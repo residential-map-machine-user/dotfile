@@ -24,6 +24,9 @@ depends = ['deoplete.vim']
 repo = 'chemzqm/vim-easygit'
 depends = ['denite-git.vim']
 
+[[plugins]]#emmet vim 
+repo = 'mattn/emmet-vim'
+
 [[plugins]]#denite
 repo = 'chemzqm/denite-git'
 depends = ['denite.vim']
