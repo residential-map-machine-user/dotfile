@@ -17,7 +17,8 @@ if &runtimepath !~# '/dein.vim'
     if !isdirectory(s:dein_repo_dir)
         call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
     endif
-" dein.vim をプラグインとして読み込む execute 'set runtimepath^=' . s:dein_repo_dir
+" dein.vim をプラグインとして読み込む 
+    execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 
 if dein#load_state(s:dein_cache_dir)
