@@ -151,3 +151,5 @@ nnoremap gco :Gcommit<CR>
 nnoremap gd :Gdiff<CR>
 nnoremap gb :Gblame<CR>
 
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
