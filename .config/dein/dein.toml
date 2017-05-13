@@ -7,6 +7,9 @@ hook_add = 'let g:deoplete#enable_at_startup = 1'
 
 [[plugins]]
 repo = 'fatih/vim-go'
+hook_add = '''
+nnoremap <C-o><C-R> :GoRun<CR>
+'''
 
 [[plugins]]#denite
 repo = 'Shougo/denite.nvim'
