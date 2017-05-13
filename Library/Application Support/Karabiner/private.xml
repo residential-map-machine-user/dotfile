@@ -17,6 +17,16 @@
             <autogen>--KeyToKey-- KeyCode::JIS_BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
         </item>
     </list>
+    <item>
+      <name>
+        Use CONTROL + JIS_BRACKET_LEGT as ESCAPE
+      </name>
+      <autogen>
+        __KeyToKey__
+        KeyCode::JIS_BRACKET_LEFT, ModifierFlag::CONTROL_L,
+        KeyCode::ESCAPE
+      </autogen>
+    </item>
 </root>
 <root>
   <appdef>
@@ -33,4 +43,3 @@
     </autogen>
   </item>
 </root>
-
