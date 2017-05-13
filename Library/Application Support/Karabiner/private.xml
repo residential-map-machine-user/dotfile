@@ -1,45 +1,58 @@
 <?xml version="1.0"?>
 <root>
-    <appdef>
-        <appname>iTERM2</appname>
-        <equal>com.googlecode.iterm2</equal>
-    </appdef>
-    <appdef>
-        <appname>MACVIM</appname>
-        <equal>org.vim.MacVim</equal>
-    </appdef>
-    <list>
-        <item>
-            <name>Leave Insert Mode with EISUU (vim keybind apps)</name>
-            <identifier>private.vim_keybind_apps_esc_with_eisuu</identifier>
-            <only>iTERM2,TERMINAL,MACVIM</only>
-            <autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::ESCAPE, KeyCode::JIS_EISUU</autogen>
-            <autogen>--KeyToKey-- KeyCode::JIS_BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
-        </item>
-    </list>
+  <appdef>
+    <appname>iTERM2</appname>
+    <equal>com.googlecode.iterm2</equal>
+  </appdef>
+  <appdef>
+    <appname>MACVIM</appname>
+    <equal>org.vim.MacVim</equal>
+  </appdef>
+  <appdef>
+    <appname>MACVIM</appname>
+    <equal>org.vim.MacVim</equal>
+  </appdef>
+  <appdef>
+    <appname>PhpStorm</appname>
+    <prefix>com.jetbrains.PhpStorm</prefix>
+  </appdef>
+
+  <appdef>
+    <appname>RubyMine</appname>
+    <prefix>com.jetbrains.rubymine</prefix>
+  </appdef>
+
+  <appdef>
+    <appname>WebStorm</appname>
+    <prefix>com.jetbrains.WebStorm</prefix>
+  </appdef>
+
+  <appdef>
+    <appname>IntelliJ</appname>
+    <prefix>com.jetbrains.intellij</prefix>
+  </appdef>
+
+  <list>
     <item>
+      <name>Leave Insert Mode with EISUU (vim keybind apps)</name>
+      <identifier>private.vim_keybind_apps_esc_with_eisuu</identifier>
+      <only>iTERM2,TERMINAL,MACVIM</only>
+      <autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::ESCAPE, KeyCode::JIS_EISUU</autogen>
+      <autogen>--KeyToKey-- KeyCode::JIS_BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_BRACKET_LEFT, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
+    </item>
+  </list>
+  <list>
+    <item>
+      <identifier>private.jetbrains_key_bindings_for_esc</identifier>
       <name>
-        Use CONTROL + JIS_BRACKET_LEGT as ESCAPE
+        Use CONTROL + BRACKET_RIHT as ESCAPE
       </name>
+      <only>RubyMine</only>
       <autogen>
         __KeyToKey__
-        KeyCode::JIS_BRACKET_LEFT, ModifierFlag::CONTROL_L,
+        KeyCode::BRACKET_RIGHT, ModifierFlag::CONTROL_L,
         KeyCode::ESCAPE
       </autogen>
     </item>
-</root>
-<root>
-  <appdef>
-    <appname>JetbrainsApps</appname>
-    <prefix>com.jetbrains.</prefix>
-  </appdef>
-  <item>
-    <name>Use CONTROL + JIS_BRACKET_LEFT as ESCAPE in JetbrainsApps</name>
-    <identifier>private.jetbrains_control_jis_bracket_left</identifier>
-    <only>JetbrainsApps</only>
-    <autogen>
-      __KeyToKey__ KeyCode::JIS_BRACKET_LEFT, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL,
-      KeyCode::ESCAPE
-    </autogen>
-  </item>
+  </list>
 </root>
