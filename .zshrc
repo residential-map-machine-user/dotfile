@@ -3,9 +3,9 @@ alias vi=/usr/local/bin/vim
 alias interval="defaults write org.eyebeam.SelfControl BlockDuration -int 450"
 alias block="sudo /Applications/SelfControl.app/Contents/MacOS/org.eyebeam.SelfControl $(id -u $(whoami)) --install"
 alias rake erd="rake erd --attributes=foreign_keys,primary_keys,content,timestamp --filename=erd_sample --filetype=png"
-alias gla="git lga"
 alias server="ruby -rwebrick -e 'WEBrick::HTTPServer.new(:DocumentRoot => \"./\", :Port => 8000).start'"
 alias vim=nvim
+alias gla="git-foresta --all --style=1 --graph-symbol-commit=★ --graph-symbol-tip=☆ --graph-margin-right=2 | less -RSX"
 
 #zshの設定
 plugins=(git)
