@@ -1,3 +1,2 @@
 inoremap ¥ \
 inoremap \ ¥
-inoremap <C-]> <Esc>
