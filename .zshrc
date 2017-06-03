@@ -6,6 +6,7 @@ alias rake erd="rake erd --attributes=foreign_keys,primary_keys,content,timestam
 alias server="ruby -rwebrick -e 'WEBrick::HTTPServer.new(:DocumentRoot => \"./\", :Port => 8000).start'"
 alias vim=nvim
 alias gla="git-foresta --all --style=1 --graph-symbol-commit=★ --graph-symbol-tip=☆ --graph-margin-right=2 | less -RSX"
+alias git lga="git-foresta --all --style=1 --graph-symbol-commit=★ --graph-symbol-tip=☆ --graph-margin-right=2 | less -RSX"
 
 #zshの設定
 plugins=(git)
