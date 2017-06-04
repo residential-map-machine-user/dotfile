@@ -58,9 +58,6 @@ repo = 'cohama/vim-smartinput-endwise'
 [[plugins]] #denite のソース
 repo = 'Shougo/neomru.vim'
 
-[[plugins]] #denite のソース
-repo = 'Shougo/neoyank.vim'
-
 [[plugins]] #vim color scheme TODO カラースキームの変更
 repo = 'w0ng/vim-hybrid'
 
