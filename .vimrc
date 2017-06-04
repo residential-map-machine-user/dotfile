@@ -151,3 +151,4 @@ nnoremap gb :Gblame<CR>
 
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
+nnoremap <C-t> :tabnew<CR>
