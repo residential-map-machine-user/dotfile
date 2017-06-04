@@ -138,6 +138,7 @@ imap   <C-e>, <plug>(emmet-expand-abbr)
 "key map個人
 "highlight CursorLine term=reverse cterm=reverse
 set background=dark
+" autocmd colorscheme antares highlight Visual ctermbg=8
 colorscheme antares
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
