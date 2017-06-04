@@ -80,8 +80,6 @@ set nobackup
 set ruler
 set laststatus=2
 set showcmd
-set hlsearch
-set hlsearch
 " set incsearch
 set ignorecase
 set title
@@ -138,9 +136,9 @@ imap   <C-e>, <plug>(emmet-expand-abbr)
 
 
 "key map個人
-highlight CursorLine term=reverse cterm=reverse
+"highlight CursorLine term=reverse cterm=reverse
 set background=dark
-colorscheme hybrid
+colorscheme antares
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
 
