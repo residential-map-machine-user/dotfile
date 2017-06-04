@@ -20,7 +20,6 @@ if &runtimepath !~# '/dein.vim'
 " dein.vim をプラグインとして読み込む 
     execute 'set runtimepath^=' . s:dein_repo_dir
 endif
-
 if dein#load_state(s:dein_cache_dir)
     call dein#begin(s:dein_cache_dir)
 
@@ -89,7 +88,8 @@ set smartindent
 set conceallevel=0
 set completeopt+=noselect
 set completeopt+=noinsert
-
+set list
+set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
 "deocompleteの設定
 "TODO denite のsnippetsの設定を行う
 
