@@ -18,7 +18,6 @@ EOS >> $HOME/.bashrc
 source ~/.bashrc
 pyenv install 3.6.1
 
-
 ##sshの設定
 ssh-keygen -t rsa -C "y.matsukon@gmail.com" 
 ```.ssh/config
@@ -31,7 +30,7 @@ IdentityFile ~/.ssh/id_rsa
 ##neovim install
 sudo yum install neovim
 sudo yum -y install epel-release
-sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo 
+sudo curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repo
 sudo yum -y install neovim
 
 

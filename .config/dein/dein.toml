@@ -95,6 +95,3 @@ on_ft = 'toml'
 
 [[plugins]]
 repo = 'ujihisa/neco-look'
-
-[[plugins]]
-repo = "bronson/vim-trailing-whitespace"
