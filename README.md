@@ -54,6 +54,8 @@ ln -s $HOME/dotfile/.vimrc  $XDG_CONFIG_HOME/nvim/init.vim
 
 ##VIMの環境設定
 vimprocでvimproc_linux64.soがないと言われる場合
+git clone git@github.com:Haron-Prime/Antares.git  $HOME/source/local
+cp $HOME/source/local/Antares/colors/antares.vim $XDG_CONFIG_HOME/nvim/colors/
 
 ln -s $HOME/.cache/dein/repos/github.com/Shougo/vimproc.vim/lib/vimproc_linux64.so $HOME/cache/dein/.cache/init.vim/.dein/lib/vimproc_linux64.so
 
