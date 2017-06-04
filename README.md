@@ -76,3 +76,7 @@ sudo make install
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
 ##vimproc error 
+
+##git-foresta の設定
+mkdir $HOME/bin
+sudo curl -L https://github.com/takaaki-kasai/git-foresta/raw/master/git-foresta -o ~/bin/git-foresta
