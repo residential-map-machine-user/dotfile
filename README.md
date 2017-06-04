@@ -80,3 +80,5 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 ##git-foresta の設定
 mkdir $HOME/bin
 sudo curl -L https://github.com/takaaki-kasai/git-foresta/raw/master/git-foresta -o ~/bin/git-foresta
+chmod +x ~/bin/git-foresta
+export PATH=$PATH:$HOME/bin/git-foresta
