@@ -1,5 +1,6 @@
 /*
 !/.gitignore
+!/README.md
 !/.config/dein/dein.toml
 !/.config/dein/dein_lazy.toml
 !/.vimrc
