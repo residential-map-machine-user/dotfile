@@ -28,8 +28,10 @@ if dein#load_state(s:dein_cache_dir)
     call dein#load_toml(s:toml_dir . '/dein.toml')
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
-      call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
       call dein#load_toml(s:toml_dir . '/dein_denite.toml', {'lazy': 1})
+      call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
+    else
+      call dein#load_toml(s:toml_dir . '/dein_unite.toml', {'lazy': 1})
     endif
     if has('lua')
       call dein#add('Shougo/neocomplete.vim', {
@@ -39,7 +41,6 @@ if dein#load_state(s:dein_cache_dir)
       call dein#add('ujihisa/neco-look', {
             \ 'depends': ['neocomplete.vim']})
     endif
-    call dein#load_toml(s:toml_dir . '/dein_unite.toml', {'lazy': 1})
     " call dein#add( 'Shougo/vimfiler', {
     "       \ 'depends' : 'Shougo/unite',
     "       \ 'autoload' : {
@@ -92,7 +93,6 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set number
-set nobackup
 set ruler
 set laststatus=2
 set showcmd
@@ -107,6 +107,8 @@ set completeopt+=noselect
 set completeopt+=noinsert
 set list
 set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
+set directory=~/.vim/
+set backupdir=~/.vim/
 "deocompleteの設定
 "unite
 let g:unite_source_grep_command = 'ag'
