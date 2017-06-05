@@ -51,6 +51,15 @@ if dein#load_state(s:dein_cache_dir)
     "       \)
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#add('scrooloose/nerdtree')
+    call dein#add('Shougo/vimproc.vim', {
+          \ 'build': {
+          \     'windows' : 'tools\\update-dll-mingw',
+          \     'cygwin'  : 'make -f make_cygwin.mak',
+          \     'mac'     : 'make -f make_mac.mak',
+          \     'linux'   : 'make',
+          \     'unix'    : 'gmake',
+          \    },
+          \ })
     call dein#add( 'Shougo/vimshell', {
           \ 'depends' : 'Shougo/vimproc',
           \ 'autoload' : {
