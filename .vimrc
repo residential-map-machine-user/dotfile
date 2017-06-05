@@ -25,24 +25,32 @@ if dein#load_state(s:dein_cache_dir)
 
     let s:toml_dir = g:config_home . '/dein'
 
+    call dein#load_toml(s:toml_dir . '/dein.toml')
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
-      call dein#load_toml(s:toml_dir . '/dein.toml')
       call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
-    else
-      call dein#add('Shougo/neocomplete.nvim')
+      call dein#load_toml(s:toml_dir . '/dein_denite.toml', {'lazy': 1})
     endif
-    call dein#add( 'Shougo/unite.vim')
-    call dein#add( 'Shougo/vimfiler', {
-          \ 'depends' : 'Shougo/unite',
-          \ 'autoload' : {
-          \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
-          \                 'VimShellExecute', 'VimShellInteractive',
-          \                 'VimShellTerminal', 'VimShellPop'],
-          \   'mappings' : ['<Plug>(vimshell_switch)']
-          \ }}
-          \)
+    if has('lua')
+      call dein#add('Shougo/neocomplete.vim', {
+            \ 'on_i': 1,
+            \ 'lazy': 1})
+
+      call dein#add('ujihisa/neco-look', {
+            \ 'depends': ['neocomplete.vim']})
+    endif
+    call dein#load_toml(s:toml_dir . '/dein_unite.toml', {'lazy': 1})
+    " call dein#add( 'Shougo/vimfiler', {
+    "       \ 'depends' : 'Shougo/unite',
+    "       \ 'autoload' : {
+    "       \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
+    "       \                 'VimShellExecute', 'VimShellInteractive',
+    "       \                 'VimShellTerminal', 'VimShellPop'],
+    "       \   'mappings' : ['<Plug>(vimshell_switch)']
+    "       \ }}
+    "       \)
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
+    call dein#add('scrooloose/nerdtree')
     call dein#add( 'Shougo/vimshell', {
           \ 'depends' : 'Shougo/vimproc',
           \ 'autoload' : {
@@ -91,7 +99,11 @@ set completeopt+=noinsert
 set list
 set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
 "deocompleteの設定
-"TODO denite のsnippetsの設定を行う
+"unite
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+let g:unite_source_grep_max_candidates = 200
+let g:unite_source_grep_recursive_opt = ''
 
 "git gutterの設定
 function! MyGitGutter()
@@ -123,12 +135,17 @@ omap / <Plug>(easymotion-tn)
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
 
+"nerdtree設定
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+let NERDTreeShowHidden=1
+
 "vimfilerの設定
-let g:vimfiler_as_default_explorer  = 1
-let g:vimfiler_safe_mode_by_default = 0
+" let g:vimfiler_as_default_explorer  = 1
+" let g:vimfiler_safe_mode_by_default = 0
 " let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
 " nnoremap <silent><C-u><C-j> :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit -toggle<CR>
-nnoremap <Leader>v :VimFilerExplorer<CR>
+nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
 imap   <C-e>, <plug>(emmet-expand-abbr)
