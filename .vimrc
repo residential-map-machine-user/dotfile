@@ -108,7 +108,7 @@ set completeopt+=noinsert
 set list
 set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
-set backupdir=~/.vim/
+set undodir=~/.vim/
 "deocompleteの設定
 "unite
 let g:unite_source_grep_command = 'ag'
