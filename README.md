@@ -83,6 +83,12 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 
 ## vimproc error 
 
+vimpprocがないと言われる場合は次の場所でmakeする
+ちなみにこれはnvimではない場合
+cd $HOME/.cache/dein/repos/github.com/Shougo/vimproc.vim
+make 
+
+
 ## git-foresta の設定
 
 mkdir $HOME/bin
