@@ -1,0 +1,17 @@
+[[plugins]]
+repo = 'Shougo/unite.vim'
+on_event = 'BufRead'
+hook_add = '''
+nnoremap [unite] <Nop>
+nmap <C-u> [unite]
+nmap <silent> [unite]<C-u> :<C-u>Unite filetype<CR>
+nmap <silent> [unite]<C-p> :<C-u>Unite file_rec<CR>
+nmap <silent> [unite]<C-g> :<C-u>Unite grep<CR>
+nmap <silent> <C-g><C-g> :<C-u>Unite grep<CR>
+nmap <silent> [unite]<C-u> :<C-u>Unite file_mru file_rec<CR>
+nmap <silent> [unite]<C-y> :<C-u>Unite neoyank<CR>
+nmap <silent> [unite]<C-y> :<C-u>Unite neoyank<CR>
+nmap <silent> [unite]<C-y> :<C-u>Unite neoyank<CR>
+nmap <silent> [unite]<C-y> :<C-u>Unite neoyank<CR>
+nmap <silent> [unite]<C-y> :<C-u>Unite neoyank<CR>
+'''
