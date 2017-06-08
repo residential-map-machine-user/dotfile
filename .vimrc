@@ -151,8 +151,8 @@ nmap  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
 " vimshell 設定
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
+" let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+" nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
 
 "nerdtree設定
 autocmd StdinReadPre * let s:std_in=1
