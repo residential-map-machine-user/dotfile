@@ -111,11 +111,19 @@ set directory=~/.vim/
 set undodir=~/.vim/
 "deocompleteの設定
 "unite
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-let g:unite_source_grep_max_candidates = 200
-let g:unite_source_grep_recursive_opt = ''
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+  let g:unite_source_grep_max_candidates = 1000
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
+if executable('hw')
+  let g:unite_source_grep_command = 'hw'
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+  let g:unite_source_grep_max_candidates = 1000
+  let g:unite_source_grep_recursive_opt = ''
+endif
 "git gutterの設定
 function! MyGitGutter()
   if ! exists('*GitGutterGetHunkSummary')
