@@ -7,7 +7,7 @@ nnoremap [denite] <Nop>
 nmap <C-u> [denite]
 nmap <silent> [denite]<C-g> :<C-u>Denite grep<CR>
 nmap <silent> [denite]<C-]> :<C-u>DeniteCursorWord grep<CR>
-nmap <silent> [denite]<C-u> :<C-u>Denite file_rec<CR>
+nmap <silent> [denite]<C-u> :<C-u>Denite file_mru file_rec<CR>
 nmap <silent> [denite]<C-y> :<C-u>Denite neoyank<CR>
 nmap <silent> [denite]<C-t> :<C-u>Denite tab<CR>
 '''

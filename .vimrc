@@ -110,6 +110,7 @@ set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
 set undodir=~/.vim/
 "deocompleteの設定
+let g:deoplete#enable_at_startup = 1
 "unite
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
