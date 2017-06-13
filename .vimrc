@@ -39,10 +39,7 @@ if dein#load_state(s:dein_cache_dir)
             \ 'lazy': 1})
 
       call dein#add('ujihisa/neco-look', {
-            \ 'depends': ['neocomplete.vim']})
-    endif
-    " call dein#add( 'Shougo/vimfiler', {
-    "       \ 'depends' : 'Shougo/unite',
+            \ 'depends': ['neocomplete.vim']}) endif " call dein#add( 'Shougo/vimfiler', { \ 'depends' : 'Shougo/unite',
     "       \ 'autoload' : {
     "       \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
     "       \                 'VimShellExecute', 'VimShellInteractive',
@@ -52,6 +49,11 @@ if dein#load_state(s:dein_cache_dir)
     "       \)
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#add('scrooloose/nerdtree')
+    call dein#add('jistr/vim-nerdtree-tabs')
+    call dein#add('Xuyuanp/nerdtree-git-plugin')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('Yggdroot/indentLine')
+    call dein#add('tyru/open-browser.vim')
     call dein#add('Shougo/vimproc.vim', {
           \ 'build': {
           \     'windows' : 'tools\\update-dll-mingw',
@@ -82,7 +84,7 @@ endif
 syntax on
 filetype plugin indent  on
 set wildmenu
-set history=200
+set history=300
 set modifiable
 set write
 set wrap
@@ -104,8 +106,9 @@ set autoindent
 set smartindent
 set conceallevel=0
 set completeopt+=noinsert
+" set completeopt+=noselect
 set list
-set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
+set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
 set undodir=~/.vim/
 "deocompleteの設定
@@ -158,6 +161,21 @@ omap / <Plug>(easymotion-tn)
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 let NERDTreeShowHidden=1
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+"openbrowser
+nmap <Leader>b <Plug>(openbrowser-smart-search)
+vmap <Leader>b <Plug>(openbrowser-smart-search)
+
+"airlineの設定
+" タブバーのカスタマイズを有効にする
+let g:airline#extensions#tabline#enabled = 1
+
+" タブバーの右領域を非表示にする
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_close_button = 0
+
 
 "vimfilerの設定
 " let g:vimfiler_as_default_explorer  = 1
