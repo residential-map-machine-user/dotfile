@@ -39,7 +39,10 @@ if dein#load_state(s:dein_cache_dir)
             \ 'lazy': 1})
 
       call dein#add('ujihisa/neco-look', {
-            \ 'depends': ['neocomplete.vim']}) endif " call dein#add( 'Shougo/vimfiler', { \ 'depends' : 'Shougo/unite',
+            \ 'depends': ['neocomplete.vim']})
+    endif
+    " call dein#add( 'Shougo/vimfiler', {
+    "       \ 'depends' : 'Shougo/unite',
     "       \ 'autoload' : {
     "       \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
     "       \                 'VimShellExecute', 'VimShellInteractive',
@@ -164,8 +167,8 @@ let NERDTreeShowHidden=1
 let g:nerdtree_tabs_open_on_console_startup = 1
 
 "openbrowser
-nmap <Leader>b <Plug>(openbrowser-smart-search)
-vmap <Leader>b <Plug>(openbrowser-smart-search)
+nmap <Leader>o <Plug>(openbrowser-smart-search)
+vmap <Leader>o <Plug>(openbrowser-smart-search)
 
 "airlineの設定
 " タブバーのカスタマイズを有効にする
