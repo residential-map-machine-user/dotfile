@@ -103,7 +103,6 @@ set noshowmode
 set autoindent
 set smartindent
 set conceallevel=0
-set completeopt+=noselect
 set completeopt+=noinsert
 set list
 set listchars=tab:>.,trail:.,eol:↲,extends:>,precedes:<,nbsp:%
