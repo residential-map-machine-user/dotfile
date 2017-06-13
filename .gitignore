@@ -11,5 +11,6 @@
 !/Library/Application\ Support/Karabiner/private.xml
 !/ruby-mine-settings.jar
 !/ubuntu_set_up.sh
+!/setup.sh
 !/.config/dein/dein_denite.toml
 !/.config/**/*.toml
