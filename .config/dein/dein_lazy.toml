@@ -5,8 +5,8 @@ on_event = 'BufRead'
 hook_add = '''
 nnoremap [denite] <Nop>
 nmap <C-u> [denite]
-nmap <silent> [denite]<C-g> :<C-u>Denite -highlight-mode-normal -default-action=tabopen -auto-highlight   grep<CR>
-nmap <silent> [denite]<C-u> :<C-u>Denite -highlight-mode-normal  -default-action=tabopen -auto-highlight file_mru file_rec<CR>
+nmap <silent> [denite]<C-g> :<C-u>Denite -default-action=tabopen -auto-highlight  grep<CR>
+nmap <silent> [denite]<C-u> :<C-u>Denite  -default-action=tabopen -auto-highlight file_mru file_rec<CR>
 nmap <silent> [denite]<C-y> :<C-u>Denite -mode=normal  neoyank<CR>
 nmap <silent> [denite]<C-t> :<C-u>Denite -mode=normal tab<CR>
 '''
