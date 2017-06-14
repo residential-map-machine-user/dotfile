@@ -178,7 +178,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_section_c = airline#section#create(['path'])
 
 
