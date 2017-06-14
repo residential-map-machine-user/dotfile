@@ -5,8 +5,8 @@ hook_add = '''
 nnoremap [unite] <Nop>
 nmap <C-u> [unite]
 nmap <silent> [unite]<C-u> :<C-u>Unite filetype<CR>
-nmap <silent> [unite]<C-p> :<C-u>Unite file_rec<CR>
-nmap <silent> [unite]<C-g> :<C-u>Unite grep<CR>
-nmap <silent> [unite]<C-u> :<C-u>Unite file_mru file_rec<CR>
-nmap <silent> [unite]<C-u> :<C-t>Unite tab<CR>
+nmap <silent> [unite]<C-p> :<C-u>Unite -default-action=tabopen file_rec<CR>
+nmap <silent> [unite]<C-g> :<C-u>Unite -default-action=tabopen grep<CR>
+nmap <silent> [unite]<C-u> :<C-u>Unite -default-action=tabopen file_mru file_rec<CR>
+nmap <silent> [unite]<C-t> :<C-u>Unite tab<CR>
 '''
