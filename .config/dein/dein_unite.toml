@@ -7,6 +7,6 @@ nmap <C-u> [unite]
 nmap <silent> [unite]<C-u> :<C-u>Unite filetype<CR>
 nmap <silent> [unite]<C-p> :<C-u>Unite file_rec<CR>
 nmap <silent> [unite]<C-g> :<C-u>Unite grep<CR>
-nmap <silent> [unite]<C-u> :<C-u>Unite file_rec file_mru<CR>
+nmap <silent> [unite]<C-u> :<C-u>Unite file_mru file_rec<CR>
 nmap <silent> [unite]<C-u> :<C-t>Unite tab<CR>
 '''
