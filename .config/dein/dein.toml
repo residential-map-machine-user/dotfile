@@ -41,9 +41,6 @@ repo = 'tpope/vim-surround'
 [[plugins]] #コメントを行う
 repo = 'tpope/vim-commentary'
 
-[[plugins]] #下部のバーにrepositoryを表示してくれる
-repo = 'itchyny/lightline.vim'
-
 [[plugins]] #git diff を表示する
 repo = 'airblade/vim-gitgutter'
 

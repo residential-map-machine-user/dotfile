@@ -7,10 +7,6 @@ repo = 'Shougo/neco-vim'
 depends = ['deoplete.vim']
 
 [[plugins]]#denite git source 
-repo = 'Shougo/neco-vim'
-depends = ['deoplete.vim']
-
-[[plugins]]#denite git source 
 repo = 'chemzqm/vim-easygit'
 depends = ['denite-git.vim']
 
