@@ -14,6 +14,9 @@ nnoremap <C-o><C-R> :GoRun<CR>
 [[plugins]]
 repo = 'zchee/deoplete-go'
 
+[[plugins]]#emmet vim 
+repo = 'mattn/emmet-vim'
+
 #[[plugins]] #??????? OS 依存性あり、特にwindowsは注意
 #repo = 'Shougo/vimproc.vim' 
 
