@@ -189,7 +189,7 @@ let g:airline_section_c = airline#section#create(['path'])
 nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
-imap   <C-e>, <plug>(emmet-expand-abbr)
+imap <C-e>, <plug>(emmet-expand-abbr)
 
 
 
