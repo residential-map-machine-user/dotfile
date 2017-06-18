@@ -14,6 +14,4 @@ depends = ['denite-git.vim']
 repo = 'chemzqm/denite-git'
 depends = ['denite.vim']
 
-[[plugins]]#typescript
-repo = 'leafgarland/typescript-vim'
 
