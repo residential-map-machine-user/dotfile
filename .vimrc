@@ -67,6 +67,11 @@ call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
           \   'mappings' : ['<Plug>(vimshell_switch)']
           \ }}
           \)
+    call dein#add( 'leafgarland/typescript-vim', {
+          \ 'autoload' :{
+          \   'filetypes': ['typescript']
+          \ }
+          \})
     call dein#end()
     call dein#save_state()
   endif
@@ -157,6 +162,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 let NERDTreeShowHidden=1
 let g:nerdtree_tabs_open_on_console_startup = 1
+let g:NERDTreeMapOpenInTab = "o"
 
 "openbrowser
 nmap <Leader>o <Plug>(openbrowser-smart-search)
@@ -182,8 +188,6 @@ nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
 imap <C-e>, <plug>(emmet-expand-abbr)
-
-
 
 "key map個人
 "highlight CursorLine term=reverse cterm=reverse
