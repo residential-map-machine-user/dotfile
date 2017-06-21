@@ -7,6 +7,7 @@ alias vim=nvim
 alias server="ruby -rwebrick -e 'WEBrick::HTTPServer.new(:DocumentRoot => \"./\", :Port => 8000).start'"
 alias gla="git-foresta --all --style=1 --graph-symbol-commit=★ --graph-symbol-tip=☆ --graph-margin-right=2 | less -RSX"
 alias git lga="git-foresta --all --style=1 --graph-symbol-commit=★ --graph-symbol-tip=☆ --graph-margin-right=2 | less -RSX"
+alias search="find . -type f -print | xargs grep --color=auto -n "
 
 #zshの設定
 plugins=(git)
