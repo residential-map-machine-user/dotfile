@@ -31,6 +31,7 @@ PATH=/usr/local/sbin::/Users/$USER/.nodebrew/current/bin:/usr/local/bin:/Users/$
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.phpenv/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/local/bin:$PATH"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 source $ZSH/oh-my-zsh.sh
