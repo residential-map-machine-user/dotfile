@@ -57,15 +57,7 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('vim-airline/vim-airline')
     call dein#add('Yggdroot/indentLine')
     call dein#add('tyru/open-browser.vim')
-    call dein#add('Shougo/vimproc.vim', {
-          \ 'build': {
-          \     'windows' : 'tools\\update-dll-mingw',
-          \     'cygwin'  : 'make -f make_cygwin.mak',
-          \     'mac'     : 'make -f make_mac.mak',
-          \     'linux'   : 'make',
-          \     'unix'    : 'gmake',
-          \    },
-          \ })
+call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
     call dein#add( 'Shougo/vimshell', {
           \ 'depends' : 'Shougo/vimproc',
           \ 'autoload' : {
@@ -117,12 +109,12 @@ set undodir=~/.vim/
 "deocompleteの設定
 let g:deoplete#enable_at_startup = 1
 "unite
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-  let g:unite_source_grep_max_candidates = 1000
-  let g:unite_source_grep_recursive_opt = ''
-endif
+ if executable('ag')
+   let g:unite_source_grep_command = 'ag'
+   let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+   let g:unite_source_grep_max_candidates = 1000
+   let g:unite_source_grep_recursive_opt = ''
+ endif
 
 if executable('hw')
   let g:unite_source_grep_command = 'hw'
