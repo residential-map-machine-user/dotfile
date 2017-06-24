@@ -25,13 +25,13 @@ if dein#load_state(s:dein_cache_dir)
 
     let s:toml_dir = g:config_home . '/dein'
 
-    call dein#load_toml(s:toml_dir . '/dein.toml')
+    call dein#load_toml(s:toml_dir . '/common.toml')
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
-      call dein#load_toml(s:toml_dir . '/dein_denite.toml', {'lazy': 1})
-      call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
+      call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
+      call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
     else
-      call dein#load_toml(s:toml_dir . '/dein_unite.toml', {'lazy': 1})
+      call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
     if has('lua')
       call dein#add('Shougo/neocomplete.vim', {
@@ -41,32 +41,14 @@ if dein#load_state(s:dein_cache_dir)
       call dein#add('ujihisa/neco-look', {
             \ 'depends': ['neocomplete.vim']})
     endif
-    " call dein#add( 'Shougo/vimfiler', {
-    "       \ 'depends' : 'Shougo/unite',
-    "       \ 'autoload' : {
-    "       \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
-    "       \                 'VimShellExecute', 'VimShellInteractive',
-    "       \                 'VimShellTerminal', 'VimShellPop'],
-    "       \   'mappings' : ['<Plug>(vimshell_switch)']
-    "       \ }}
-    "       \)
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#add('scrooloose/nerdtree')
     call dein#add('jistr/vim-nerdtree-tabs')
-    call dein#add('Xuyuanp/nerdtree-git-plugin')
+    " call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('vim-airline/vim-airline')
     call dein#add('Yggdroot/indentLine')
-    call dein#add('tyru/open-browser.vim')
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-    call dein#add( 'Shougo/vimshell', {
-          \ 'depends' : 'Shougo/vimproc',
-          \ 'autoload' : {
-          \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
-          \                 'VimShellExecute', 'VimShellInteractive',
-          \                 'VimShellTerminal', 'VimShellPop'],
-          \   'mappings' : ['<Plug>(vimshell_switch)']
-          \ }}
-          \)
+    "vimprocは便利だけれど実際の業務だと導入できない環境が存在するvimprocを使わないgrepが欲しい
+    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
     call dein#add( 'leafgarland/typescript-vim', {
           \ 'autoload' :{
           \   'filetypes': ['typescript']
@@ -84,7 +66,7 @@ endif
 syntax on
 filetype plugin indent  on
 set wildmenu
-set history=300
+set history=1000
 set modifiable
 set write
 set wrap
@@ -105,7 +87,7 @@ set noshowmode
 set autoindent
 set smartindent
 set conceallevel=0
-set completeopt+=noinsert
+set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
 " set completeopt+=noselect
 set list
 set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
@@ -119,14 +101,22 @@ let g:deoplete#enable_at_startup = 1
    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
    let g:unite_source_grep_max_candidates = 1000
    let g:unite_source_grep_recursive_opt = ''
+   let g:ctrlp_use_caching=0
+   let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g '
  endif
 
-if executable('hw')
-  let g:unite_source_grep_command = 'hw'
-  let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-  let g:unite_source_grep_max_candidates = 1000
-  let g:unite_source_grep_recursive_opt = ''
-endif
+let s:unite_ignore_file_rec_patterns=
+     \ ''
+     \ .'vendor/bundle\|.bundle/\|\.sass-cache/\|'
+     \ .'node_modules/\|bower_components/\|'
+     \ .'\.\(bmp\|gif\|jpe\?g\|png\|webp\|ai\|psd\)"\?$'
+
+call unite#custom#source(
+     \ 'file_rec/async,file_rec/git',
+     \ 'ignore_pattern',
+     \ s:unite_ignore_file_rec_patterns)
+ "indent の高速化
+let g:indentLine_faster = 1
 "git gutterの設定
 function! MyGitGutter()
   if ! exists('*GitGutterGetHunkSummary')
