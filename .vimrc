@@ -30,6 +30,9 @@ if dein#load_state(s:dein_cache_dir)
       " toml path is $HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
+      call dein#add('deoplete.nvim')
+      call deoplete#enable()
+      call dein#add('deoplete-go')
     else
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
@@ -94,7 +97,7 @@ set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
 set undodir=~/.vim/
 "deocompleteの設定
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 "unite
  if executable('ag')
    let g:unite_source_grep_command = 'ag'
