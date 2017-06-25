@@ -2,17 +2,10 @@
 repo = 'Shougo/dein.vim' 
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = 'let g:deoplete#enable_at_startup = 1'
-
-[[plugins]]
 repo = 'fatih/vim-go'
 hook_add = '''
 nnoremap <C-o><C-R> :GoRun<CR>
 '''
-
-[[plugins]]
-repo = 'zchee/deoplete-go'
 
 [[plugins]]#emmet vim 
 repo = 'mattn/emmet-vim'
