@@ -31,7 +31,8 @@ if dein#load_state(s:dein_cache_dir)
           \   'filetypes': ['typescript']
           \ }
           \})
-    call dein#add('KazuakiM/neosnippet-snippets')
+    call dein#add('Shougo/neosnippet')
+    call dein#add('Shougo/neosnippet-snippets')
     call dein#add('thinca/vim-quickrun')
     " call dein#add ('marijnh/tern_for_vim', {
     "       \ 'build': {
@@ -90,8 +91,6 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><C-y>  neocomplcache#close_popup()
       inoremap <expr><C-e>  neocomplcache#cancel_popup()
     endif
-    call dein#add('Shougo/neosnippet')
-    call dein#add('Shougo/neosnippet-snippets')
     call dein#add('stephpy/vim-php-cs-fixer')
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#end()
