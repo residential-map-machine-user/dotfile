@@ -32,6 +32,19 @@ if dein#load_state(s:dein_cache_dir)
           \ }
           \})
     call dein#add('KazuakiM/neosnippet-snippets')
+    call dein#add('thinca/vim-quickrun')
+    " call dein#add ('marijnh/tern_for_vim', {
+    "       \ 'build': {
+    "       \   'others': 'npm install'
+    "       \}})
+    " call dein#add('neomake/neomake')
+    " autocmd! BufWritePost * Neomake " 保存時に実行する
+    " let g:neomake_javascript_enabled_makers = ['eslint']
+    
+    " call dein#add('benjie/neomake-local-eslint.vim')
+    
+    " let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
+    " let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
@@ -41,7 +54,7 @@ if dein#load_state(s:dein_cache_dir)
     endif
     if has('lua')
       call dein#load_toml(s:toml_dir . '/lua.toml')
-      call dein#add('Shougo/neocomplete')
+      call dein#add('Shougo/neocomplete', {'on_i': 1})
     endif
     if !has('nvim') && !has('lua')
       call dein#load_toml(s:toml_dir .'/no_lua_no_nvim.toml', {'lazy': 1})
@@ -267,7 +280,66 @@ let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
 
 let g:php_cs_fixer_php_path = "php"               " Path to PHP
 let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 1                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 1                    " Return the output of command if 1, else an inline information.
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
 " nnoremap <silent><leader>php :call PhpCsFixerFixDirectory()<CR>
 nnoremap <silent><leader>php :call PhpCsFixerFixFile()<CR>
+
+"neocomplete-php
+let g:neocomplete_php_locale = 'ja'
+"" vim-quickrun {{{
+function! EslintFix() abort "{{{
+    let l:quickrun_config_backup                  = g:quickrun_config['javascript']
+    let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
+    let g:quickrun_config['javascript']['runner'] = 'system'
+
+    QuickRun
+
+    let g:quickrun_config['javascript'] = l:quickrun_config_backup
+endfunction "}}}
+nnoremap <Leader>es   :<C-u>call<Space>EslintFix()<CR>
+let s:quickrun_config_javascript = {
+      \    'command':     'eslint',
+      \    'cmdopt':      '--cache --cache-location ' . s:dein_cache_dir . '/.cache/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
+      \    'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
+      \    'exec':        '%c %o %s:p'
+      \}
+let g:quickrun_config = {
+      \    '_': {
+      \        'hook/close_buffer/enable_empty_data': 1,
+      \        'hook/close_buffer/enable_failure':    1,
+      \        'outputter':                           'multi:buffer:quickfix',
+      \        'outputter/buffer/close_on_empty':     1,
+      \        'outputter/buffer/split':              ':botright',
+      \        'runner':                              'vimproc',
+      \        'runner/vimproc/updatetime':           600
+      \    },
+      \    'javascript': {
+      \        'command':     s:quickrun_config_javascript['command'],
+      \        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:dein_cache_dir . '/.eslintrc.js',
+      \        'errorformat': s:quickrun_config_javascript['errorformat'],
+      \        'exec':        s:quickrun_config_javascript['exec']
+      \    },
+      \    'javascript/watchdogs_checker': {
+      \        'type': 'watchdogs_checker/javascript'
+      \    },
+      \    'watchdogs_checker/_': {
+      \        'hook/close_quickfix/enable_exit':        1,
+      \        'hook/back_window/enable_exit':           0,
+      \        'hook/back_window/priority_exit':         1,
+      \        'hook/qfstatusline_update/enable_exit':   1,
+      \        'hook/qfstatusline_update/priority_exit': 2,
+      \        'outputter/quickfix/open_cmd':            ''
+      \    },
+      \    'watchdogs_checker/javascript': {
+      \        'command':     s:quickrun_config_javascript['command'],
+      \        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:dein_cache_dir. '/.eslintrc.limit.js',
+      \        'errorformat': s:quickrun_config_javascript['errorformat'],
+      \        'exec':        s:quickrun_config_javascript['exec']
+      \    }
+      \}
+"filetype set
+augroup Vimrc
+  autocmd!
+  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+augroup END 
