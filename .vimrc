@@ -28,11 +28,8 @@ if dein#load_state(s:dein_cache_dir)
     call dein#load_toml(s:toml_dir . '/common.toml')
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
-      call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
-      call dein#add('deoplete.nvim')
-      call deoplete#enable()
-      call dein#add('deoplete-go')
+      call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
     else
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
@@ -40,9 +37,9 @@ if dein#load_state(s:dein_cache_dir)
       call dein#add('Shougo/neocomplete.vim', {
             \ 'on_i': 1,
             \ 'lazy': 1})
-
-      call dein#add('ujihisa/neco-look', {
-            \ 'depends': ['neocomplete.vim']})
+      call dein#add( "Shougo/neosnippet" )
+      call dein#add( "Shougo/neosnippet-snippets" )
+          " スニペット集
     endif
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#add('scrooloose/nerdtree')
@@ -108,16 +105,6 @@ set undodir=~/.vim/
    let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g '
  endif
 
-let s:unite_ignore_file_rec_patterns=
-     \ ''
-     \ .'vendor/bundle\|.bundle/\|\.sass-cache/\|'
-     \ .'node_modules/\|bower_components/\|'
-     \ .'\.\(bmp\|gif\|jpe\?g\|png\|webp\|ai\|psd\)"\?$'
-
-call unite#custom#source(
-     \ 'file_rec/async,file_rec/git',
-     \ 'ignore_pattern',
-     \ s:unite_ignore_file_rec_patterns)
  "indent の高速化
 let g:indentLine_faster = 1
 "git gutterの設定
@@ -200,3 +187,22 @@ nnoremap gb :Gblame<CR>
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 nnoremap <C-t> :tabnew<CR>
+
+
+" Vim起動時にneocompleteを有効にする
+let g:neocomplete#enable_at_startup = 1
+" smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplete#enable_smart_case = 1
+" 3文字以上の単語に対して補完を有効にする
+let g:neocomplete#min_keyword_length = 3
+" 区切り文字まで補完する
+let g:neocomplete#enable_auto_delimiter = 1
+" 1文字目の入力から補完のポップアップを表示
+let g:neocomplete#auto_completion_start_length = 1
+" バックスペースで補完のポップアップを閉じる
+inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
+
+" エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定
+imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
+" タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ
+imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
