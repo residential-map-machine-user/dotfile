@@ -56,3 +56,20 @@ on_ft = 'toml'
 
 [[plugins]]
 repo = 'ujihisa/neco-look'
+
+[[plugins]]
+repo ='scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+

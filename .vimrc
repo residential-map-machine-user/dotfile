@@ -34,26 +34,17 @@ if dein#load_state(s:dein_cache_dir)
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
     if has('lua')
-      call dein#add('Shougo/neocomplete.vim', {
-            \ 'on_i': 1,
-            \ 'lazy': 1})
-      call dein#add( "Shougo/neosnippet" )
-      call dein#add( "Shougo/neosnippet-snippets" )
-          " スニペット集
+      call dein#load_toml(s:toml_dir . '/lua.toml', {'lazy': 1})
+      call dein#add( 'leafgarland/typescript-vim', {
+            \ 'autoload' :{
+            \   'filetypes': ['typescript']
+            \ }
+            \})
+    endif
+    if !has('nvim') && !has('lua')
+      call dein#load_toml(s:toml_dir .'no_lua_no_nvim.toml', {'lazy': 1}
     endif
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('jistr/vim-nerdtree-tabs')
-    " call dein#add('Xuyuanp/nerdtree-git-plugin')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('Yggdroot/indentLine')
-    "vimprocは便利だけれど実際の業務だと導入できない環境が存在するvimprocを使わないgrepが欲しい
-    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-    call dein#add( 'leafgarland/typescript-vim', {
-          \ 'autoload' :{
-          \   'filetypes': ['typescript']
-          \ }
-          \})
     call dein#end()
     call dein#save_state()
   endif
@@ -189,20 +180,3 @@ inoremap <C-h> <Left>
 nnoremap <C-t> :tabnew<CR>
 
 
-" Vim起動時にneocompleteを有効にする
-let g:neocomplete#enable_at_startup = 1
-" smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
-let g:neocomplete#enable_smart_case = 1
-" 3文字以上の単語に対して補完を有効にする
-let g:neocomplete#min_keyword_length = 3
-" 区切り文字まで補完する
-let g:neocomplete#enable_auto_delimiter = 1
-" 1文字目の入力から補完のポップアップを表示
-let g:neocomplete#auto_completion_start_length = 1
-" バックスペースで補完のポップアップを閉じる
-inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
-
-" エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定
-imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
-" タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ
-imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
