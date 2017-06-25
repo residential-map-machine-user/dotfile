@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'Shougo/neocomplecache.vim'
+repo = 'Shougo/neocomplcache.vim'
 on_event = 'InsertEnter'
 hook_add = '''
 let g:acp_enableAtStartup = 0

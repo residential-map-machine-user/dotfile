@@ -42,15 +42,15 @@ if dein#load_state(s:dein_cache_dir)
             \})
     endif
     if !has('nvim') && !has('lua')
-      call dein#load_toml(s:toml_dir .'no_lua_no_nvim.toml', {'lazy': 1}
+      call dein#load_toml(s:toml_dir .'/no_lua_no_nvim.toml', {'lazy': 1})
     endif
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#end()
     call dein#save_state()
   endif
 
-  if has('vim_starting') && dein#check_install()
-    call dein#install()
+if has('vim_starting') && dein#check_install()
+  call dein#install()
 endif
 
 
