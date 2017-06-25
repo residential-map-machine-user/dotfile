@@ -26,6 +26,11 @@ if dein#load_state(s:dein_cache_dir)
     let s:toml_dir = g:config_home . '/dein'
 
     call dein#load_toml(s:toml_dir . '/common.toml')
+    call dein#add( 'leafgarland/typescript-vim', {
+          \ 'autoload' :{
+          \   'filetypes': ['typescript']
+          \ }
+          \})
     call dein#add('KazuakiM/neosnippet-snippets')
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
@@ -35,12 +40,8 @@ if dein#load_state(s:dein_cache_dir)
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
     if has('lua')
-      call dein#load_toml(s:toml_dir . '/lua.toml', {'lazy': 1})
-      call dein#add( 'leafgarland/typescript-vim', {
-            \ 'autoload' :{
-            \   'filetypes': ['typescript']
-            \ }
-            \})
+      call dein#load_toml(s:toml_dir . '/lua.toml')
+      call dein#add('Shougo/neocomplete')
     endif
     if !has('nvim') && !has('lua')
       call dein#load_toml(s:toml_dir .'/no_lua_no_nvim.toml', {'lazy': 1})
@@ -179,3 +180,71 @@ nnoremap gb :Gblame<CR>
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 nnoremap <C-t> :tabnew<CR>
+
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+      \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php =
+      \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl =
+      \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+"}}}
+" unite.vim"{{{
+let g:unite_enable_split_vertically = 0
+let g:unite_kind_file_cd_command = 'TabpageCD'
+let g:unite_kind_file_lcd_command = 'TabpageCD'
+
+let g:unite_source_history_yank_enable = 1
+
+let g:unite_winheight = 20
+let g:unite_winwidth = 78
+let g:unite_enable_start_insert = 0
+
+" For optimize.
+let g:unite_cursor_line_highlight = 'CursorLine'
+let g:unite_source_file_mru_filename_format = ':~:.'
+let g:unite_source_file_mru_limit = 300
+let g:unite_source_directory_mru_limit = 300
+
+" For ack.
+if executable('ack-grep')
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+"}}}
