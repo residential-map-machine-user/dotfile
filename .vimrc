@@ -57,7 +57,7 @@ if dein#load_state(s:dein_cache_dir)
       call dein#add('Shougo/neocomplete', {'on_i': 1})
     endif
     if !has('nvim') && !has('lua')
-      call dein#add('Shougo/neocomplcache.vim', {'on_i': 1})
+      call dein#add('Shougo/neocomplcache.vim')
       "conplecache[]'}}}
       let g:acp_enableAtStartup = 0
       " Use neocomplcache.
