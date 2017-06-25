@@ -95,3 +95,7 @@ mkdir $HOME/bin
 sudo curl -L https://github.com/takaaki-kasai/git-foresta/raw/master/git-foresta -o ~/bin/git-foresta
 chmod +x ~/bin/git-foresta
 export PATH=$PATH:$HOME/bin/git-foresta
+
+vimrcでcomplecacheが効かない時がある
+イカ実行して解決
+:NeoComplCacheCachingDictionary
