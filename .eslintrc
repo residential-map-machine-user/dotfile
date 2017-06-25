@@ -1,0 +1,8 @@
+{
+  "env": {
+      "browser": true,
+      "jquery": true,
+      "commonjs": true
+  },
+    "extends": "eslint:recommended"
+}
