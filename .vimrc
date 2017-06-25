@@ -17,7 +17,7 @@ if &runtimepath !~# '/dein.vim'
     if !isdirectory(s:dein_repo_dir)
         call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
     endif
-" dein.vim をプラグインとして読み込む 
+" dein.vim をプラグインとして読み込む
     execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 if dein#load_state(s:dein_cache_dir)
@@ -27,23 +27,6 @@ if dein#load_state(s:dein_cache_dir)
 
     call dein#load_toml(s:toml_dir . '/common.toml')
     call dein#add('KazuakiM/neosnippet-snippets')
-    call dein#add('KazuakiM/vim-qfstatusline')
-    call dein#add('mojako/ref-sources.vim')
-    call dein#add('thinca/vim-ref')
-    "vim-ref
-    nmap <silent>K <Plug>(ref-keyword)
-    let g:ref_no_default_key_mappings = 1
-    let g:ref_cache_dir               = s:dein_cache_dir . '/vim-ref/cache'
-    let g:ref_detect_filetype         = {
-          \    'php':        ['phpmanual']
-          \}
-    let g:ref_phpmanual_path = $HOME . '/.cahce/vim-ref/php-chunked-xhtml'
-    let g:ref_use_cache           = 1
-    let g:ref_use_vimproc         = 1
-    call dein#add('osyo-manga/shabadou.vim')
-    call dein#add('osyo-manga/vim-watchdogs')
-    call dein#add('mustardamus/jqapi', {'lazy':1})
-    call dein#add('tokuhirom/jsref',   {'lazy':1})
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
@@ -138,7 +121,7 @@ function! MyGitGutter()
   return join(ret, ' ')
 endfunction
 
-"easy motionの設定　
+"easy motionの設定
 nmap  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
@@ -196,5 +179,3 @@ nnoremap gb :Gblame<CR>
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 nnoremap <C-t> :tabnew<CR>
-
-
