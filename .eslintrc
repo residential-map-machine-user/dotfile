@@ -8,9 +8,17 @@
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
       "space-in-parens": ["error", "never"],
-      "indent": ["error", 2],
+      "indent": [2, 4, {
+        'SwitchCase': 1,
+      }],
+      "key-spacing": [2, {
+        "beforeColon": false,
+        "afterColon" : true,
+        "align"      : "colon"
+      }],
       "space-before-blocks": "error",
-      "space-before-function-paren": ["error", "never"]
+      "space-before-function-paren": ["error", "never"],
+      "keyword-spacing": ["error", { "before": true }],
     },
     "extends": "eslint:recommended"
 }
