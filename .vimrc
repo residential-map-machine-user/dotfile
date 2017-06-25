@@ -26,6 +26,24 @@ if dein#load_state(s:dein_cache_dir)
     let s:toml_dir = g:config_home . '/dein'
 
     call dein#load_toml(s:toml_dir . '/common.toml')
+    call dein#add('KazuakiM/neosnippet-snippets')
+    call dein#add('KazuakiM/vim-qfstatusline')
+    call dein#add('mojako/ref-sources.vim')
+    call dein#add('thinca/vim-ref')
+    "vim-ref
+    nmap <silent>K <Plug>(ref-keyword)
+    let g:ref_no_default_key_mappings = 1
+    let g:ref_cache_dir               = s:dein_cache_dir . '/vim-ref/cache'
+    let g:ref_detect_filetype         = {
+          \    'php':        ['phpmanual']
+          \}
+    let g:ref_phpmanual_path = $HOME . '/.cahce/vim-ref/php-chunked-xhtml'
+    let g:ref_use_cache           = 1
+    let g:ref_use_vimproc         = 1
+    call dein#add('osyo-manga/shabadou.vim')
+    call dein#add('osyo-manga/vim-watchdogs')
+    call dein#add('mustardamus/jqapi', {'lazy':1})
+    call dein#add('tokuhirom/jsref',   {'lazy':1})
     if has('nvim')
       " toml path is $HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
