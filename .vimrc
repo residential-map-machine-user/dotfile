@@ -89,31 +89,9 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
       inoremap <expr><C-y>  neocomplcache#close_popup()
       inoremap <expr><C-e>  neocomplcache#cancel_popup()
-      " Enable snipMate compatibility feature.
-      call dein#add('Shougo/neosnippet')
-      call dein#add('Shougo/neosnippet-snippets')
-      imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-      smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-      xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-      " SuperTab like snippets behavior.
-      " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-      imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-      "imap <expr><TAB>
-      " \ pumvisible() ? "\<C-n>" :
-      " \ neosnippet#expandable_or_jumpable() ?
-      " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-      smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-      let g:neosnippet#enable_snipmate_compatibility = 1
-
-      " Tell Neosnippet about the other snippets
-      let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
-      " For conceal markers.
-      if has('conceal')
-        set conceallevel=2 concealcursor=niv
-      endif
     endif
+    call dein#add('Shougo/neosnippet')
+    call dein#add('Shougo/neosnippet-snippets')
     call dein#add('stephpy/vim-php-cs-fixer')
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#end()
@@ -381,3 +359,26 @@ augroup Vimrc
   autocmd!
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END 
+
+" Enable snipMate compatibility feature.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
