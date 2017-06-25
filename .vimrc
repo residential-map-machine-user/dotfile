@@ -290,7 +290,7 @@ let g:neocomplete_php_locale = 'ja'
 "" vim-quickrun {{{
 function! EslintFix() abort "{{{
     let l:quickrun_config_backup                  = g:quickrun_config['javascript']
-    let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/.eslintrc.js --fix'
+    let g:quickrun_config['javascript']['cmdopt'] = l:quickrun_config_backup['cmdopt'] .' --config '. $HOME .'/dotfile/.eslintrc --fix'
     let g:quickrun_config['javascript']['runner'] = 'system'
 
     QuickRun
@@ -316,24 +316,7 @@ let g:quickrun_config = {
       \    },
       \    'javascript': {
       \        'command':     s:quickrun_config_javascript['command'],
-      \        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:dein_cache_dir . '/.eslintrc.js',
-      \        'errorformat': s:quickrun_config_javascript['errorformat'],
-      \        'exec':        s:quickrun_config_javascript['exec']
-      \    },
-      \    'javascript/watchdogs_checker': {
-      \        'type': 'watchdogs_checker/javascript'
-      \    },
-      \    'watchdogs_checker/_': {
-      \        'hook/close_quickfix/enable_exit':        1,
-      \        'hook/back_window/enable_exit':           0,
-      \        'hook/back_window/priority_exit':         1,
-      \        'hook/qfstatusline_update/enable_exit':   1,
-      \        'hook/qfstatusline_update/priority_exit': 2,
-      \        'outputter/quickfix/open_cmd':            ''
-      \    },
-      \    'watchdogs_checker/javascript': {
-      \        'command':     s:quickrun_config_javascript['command'],
-      \        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . s:dein_cache_dir. '/.eslintrc.limit.js',
+      \        'cmdopt':      s:quickrun_config_javascript['cmdopt'] . ' --config ' . $HOME . '/dotfile/.eslintrc',
       \        'errorformat': s:quickrun_config_javascript['errorformat'],
       \        'exec':        s:quickrun_config_javascript['exec']
       \    }
