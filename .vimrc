@@ -300,7 +300,7 @@ endfunction "}}}
 nnoremap <Leader>es   :<C-u>call<Space>EslintFix()<CR>
 let s:quickrun_config_javascript = {
       \    'command':     'eslint',
-      \    'cmdopt':      '--cache --cache-location ' . s:dein_cache_dir . '/.cache/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
+      \    'cmdopt':      '--cache --cache-location ' . s:dein_cache_dir . '/eslint/.eslintcache --format compact --max-warnings 1 --no-color --no-ignore --quiet',
       \    'errorformat': '%E%f: line %l\, col %c\, Error - %m,%W%f: line %l\, col %c\, Warning - %m,%-G%.%#',
       \    'exec':        '%c %o %s:p'
       \}
