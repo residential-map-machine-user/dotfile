@@ -2,10 +2,6 @@
 repo = 'Shougo/denite.nvim'
 depends = ['neomru.vim']
 
-[[plugins]]#denite
-repo = 'Shougo/neco-vim'
-depends = ['deoplete.vim']
-
 [[plugins]]#denite git source 
 repo = 'chemzqm/vim-easygit'
 depends = ['denite-git.vim']
@@ -13,5 +9,3 @@ depends = ['denite-git.vim']
 [[plugins]]#denite
 repo = 'chemzqm/denite-git'
 depends = ['denite.vim']
-
-
