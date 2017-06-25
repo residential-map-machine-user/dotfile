@@ -11,51 +11,24 @@ nmap <silent> [denite]<C-r> :<C-u>Denite -default-action=tabopen -auto-highlight
 nmap <silent> [denite]<C-y> :<C-u>Denite -mode=normal  neoyank<CR>
 nmap <silent> [denite]<C-t> :<C-u>Denite -mode=normal tab<CR>
 '''
-hook_post_source = ''' call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+hook_post_source = '''
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
-call denite#custom#map(
-      \ 'normal',
-      \ 'a',
-      \ '<denite:do_action:add>',
-      \ 'noremap'
-      \)
-
-call denite#custom#map(
-      \ 'normal',
-      \ 'd',
-      \ '<denite:do_action:delete>',
-      \ 'noremap'
-      \)
-
-call denite#custom#map(
-      \ 'normal',
-      \ 'r',
-      \ '<denite:do_action:reset>',
-      \ 'noremap'
-      \)
-
-call denite#custom#map(
-      \ 'normal',
-      \ 'o',
-      \ '<denite:do_action:tabopen>',
-      \ 'noremap'
-      \)
-
-call deinte#custom#map(
-      \ 'insert'
-      \ '<C-N>'
-      \ '<denite:move_to_next_line>'
-      \ 'inorempa'
-)
-
-call deinte#custom#map(
-      \ 'insert'
-      \ '<C-P>'
-      \ '<denite:move_to_previous_line>'
-      \ 'inorempa'
-)
-
 '''
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+depends = ['deoplete.vim']
+
+[[plugins]]#denite
+repo = 'Shougo/neco-vim'
+depends = ['deoplete.vim']
+
+
