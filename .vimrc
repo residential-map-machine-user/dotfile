@@ -130,7 +130,7 @@ set conceallevel=0
 set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
 " set completeopt+=noselect
 set list
-set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
+" set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
 set undodir=~/.vim/
 "deocompleteの設定
@@ -197,6 +197,7 @@ let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_section_c = airline#section#create(['path'])
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 "vimfilerの設定
