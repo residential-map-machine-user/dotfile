@@ -31,7 +31,8 @@ if dein#load_state(s:dein_cache_dir)
           \   'filetypes': ['typescript']
           \ }
           \})
-    call dein#add('KazuakiM/neosnippet-snippets')
+    call dein#add('Shougo/neosnippet')
+    call dein#add('Shougo/neosnippet-snippets')
     call dein#add('thinca/vim-quickrun')
     " call dein#add ('marijnh/tern_for_vim', {
     "       \ 'build': {
@@ -58,7 +59,38 @@ if dein#load_state(s:dein_cache_dir)
       call dein#add('Shougo/neocomplete', {'on_i': 1})
     endif
     if !has('nvim') && !has('lua')
-      call dein#load_toml(s:toml_dir .'/no_lua_no_nvim.toml', {'lazy': 1})
+      call dein#add('Shougo/neocomplcache.vim')
+      "conplecache[]'}}}
+      let g:acp_enableAtStartup = 0
+      " Use neocomplcache.
+      let g:neocomplcache_enable_at_startup = 1
+      " Use smartcase.
+      let g:neocomplcache_enable_smart_case = 1
+      " Set minimum syntax keyword length.
+      let g:neocomplcache_min_syntax_length = 3
+      let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+      " Define dictionary.
+      let g:neocomplcache_dictionary_filetype_lists = {
+            \ 'default' : ''
+            \ }
+      " Plugin key-mappings.
+      inoremap <expr><C-g>     neocomplcache#undo_completion()
+      inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+      " Recommended key-mappings.
+      " <CR>: close popup and save indent.
+      inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+      function! s:my_cr_function()
+        return neocomplcache#smart_close_popup() . "\<CR>"
+      endfunction
+      " <TAB>: completion.
+      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+      " <C-h>, <BS>: close popup and delete backword char.
+      inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+      inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+      inoremap <expr><C-y>  neocomplcache#close_popup()
+      inoremap <expr><C-e>  neocomplcache#cancel_popup()
     endif
     call dein#add('stephpy/vim-php-cs-fixer')
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
@@ -66,9 +98,9 @@ if dein#load_state(s:dein_cache_dir)
     call dein#save_state()
   endif
 
-if has('vim_starting') && dein#check_install()
-  call dein#install()
-endif
+  if has('vim_starting') && dein#check_install()
+    call dein#install()
+  endif
 
 
 syntax on
@@ -327,6 +359,26 @@ augroup Vimrc
   autocmd!
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END 
-let twitvim_browser_cmd = 'open' " for Mac
-let twitvim_force_ssl = 1 
-let twitvim_count = 40
+
+" Enable snipMate compatibility feature.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
