@@ -10,9 +10,9 @@ nnoremap [unite] <Nop>
 nmap <C-u> [unite]
 nmap <silent> [unite]<C-y> :<C-u>Unite yanc<CR>
 nmap <silent> [unite]<C-r> :<C-u>Unite -start-insert file_rec/aync<CR>
-nmap <silent> [unite]<C-g> :<C-u>Unite  -start-insert grep<CR>
-nmap <silent> [unite]<C-j> :<C-u>Unite  -start-insert <CR>
-nmap <silent> [unite]<C-u> :<C-u>Unite  -start-insert file_mru file_rec/git<CR>
+nmap <silent> [unite]<C-g> :<C-u>Unite -start-insert grep<CR>
+nmap <silent> [unite]<C-i> :<C-u>Unite -start-insert <CR>
+nmap <silent> [unite]<C-u> :<C-u>Unite -start-insert file_mru file_rec/git<CR>
 nmap <silent> [unite]<C-t> :<C-u>Unite tab<CR>
 '''
 [[plugins]]
