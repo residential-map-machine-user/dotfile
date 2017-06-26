@@ -25,7 +25,6 @@ if dein#load_state(s:dein_cache_dir)
 
     let s:toml_dir = g:config_home . '/dein'
 
-    call dein#add('TwitVim')
     call dein#load_toml(s:toml_dir . '/common.toml')
     call dein#add( 'leafgarland/typescript-vim', {
           \ 'autoload' :{
