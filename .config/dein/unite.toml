@@ -8,9 +8,12 @@ let g:unite_enable_smart_case = 1
 
 nnoremap [unite] <Nop>
 nmap <C-u> [unite]
-nmap <silent> [unite]<C-y> :<C-u>Unite filetype<CR>
-nmap <silent> [unite]<C-p> :<C-u>Unite -default-action=tabopen file_rec/aync<CR>
-nmap <silent> [unite]<C-g> :<C-u>Unite -default-action=tabopen grep<CR>
-nmap <silent> [unite]<C-u> :<C-u>Unite -default-action=tabopen file_mru file_rec/async<CR>
+nmap <silent> [unite]<C-y> :<C-u>Unite yanc<CR>
+nmap <silent> [unite]<C-r> :<C-u>Unite -start-insert file_rec/aync<CR>
+nmap <silent> [unite]<C-g> :<C-u>Unite  -start-insert grep<CR>
+nmap <silent> [unite]<C-j> :<C-u>Unite  -start-insert <CR>
+nmap <silent> [unite]<C-u> :<C-u>Unite  -start-insert file_mru file_rec/git<CR>
 nmap <silent> [unite]<C-t> :<C-u>Unite tab<CR>
 '''
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
