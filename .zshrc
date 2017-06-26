@@ -37,7 +37,7 @@ source $ZSH/oh-my-zsh.sh
 #開発環境
 #eval "$(rbenv init -)"
 #eval "$(phpenv init -)"
-eval "$(pyenv init -)"
+# eval "$(pyenv init -)"
 
 #shellscript の実行
 export TERM='xterm-256color'

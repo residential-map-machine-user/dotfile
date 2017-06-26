@@ -15,6 +15,12 @@ eval "$(pyenv init -)"
 fi
 EOS >> $HOME/.bashrc
 ```
+
+#bash theme 追加
+
+git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+~/.bash_it/install.sh
+
 source ~/.bashrc
 pyenv install 3.6.1
 
