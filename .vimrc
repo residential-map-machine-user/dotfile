@@ -129,10 +129,11 @@ set smartindent
 set conceallevel=0
 set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
 " set completeopt+=noselect
-set list
+" set list
 " set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
 set undodir=~/.vim/
+set backspace=indent,eol,start
 "deocompleteの設定
 " let g:deoplete#enable_at_startup = 1
 "unite
