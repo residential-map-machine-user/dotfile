@@ -149,7 +149,7 @@ set autoindent
 set smartindent
 set conceallevel=0
 set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
-" set completeopt+=noselect
+set completeopt+=noselect
 " set list
 " set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
@@ -370,3 +370,5 @@ let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+autocmd BufNewFile,BufRead *.twig set filetype=html
