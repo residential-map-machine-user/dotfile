@@ -155,6 +155,7 @@ set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始め�
 set directory=~/.vim/
 set undodir=~/.vim/
 set backspace=indent,eol,start
+set hlsearch
 "deocompleteの設定
 " let g:deoplete#enable_at_startup = 1
 "unite
