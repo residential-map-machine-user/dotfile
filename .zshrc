@@ -26,7 +26,7 @@ export PATH="$HOME/.phpenv/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/local/bin:$PATH"
 ZSH_THEME="powerlevel9k/powerlevel9k"
-
+alias t="tmux attach || tmux"
 source $ZSH/oh-my-zsh.sh
 #開発環境
 #eval "$(rbenv init -)"
