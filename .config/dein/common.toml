@@ -25,8 +25,8 @@ repo = 'w0ng/vim-hybrid'
 [[plugins]]
 repo = "Haron-Prime/Antares"
 
-[[plugins]] #windowないの文字列検索 TODO incsearchとの連携 https://github.com/easymotion/vim-easymotion
-repo = 'easymotion/vim-easymotion'
+# [[plugins]] #windowないの文字列検索 TODO incsearchとの連携 https://github.com/easymotion/vim-easymotion
+# repo = 'easymotion/vim-easymotion'
 
 [[plugins]] #smart input TODO 要カスタマイズ
 repo = 'kana/vim-smartinput'
@@ -60,8 +60,8 @@ repo = 'ujihisa/neco-look'
 [[plugins]]
 repo ='scrooloose/nerdtree'
 
-[[plugins]]
-repo = 'jistr/vim-nerdtree-tabs'
+# [[plugins]]
+# repo = 'jistr/vim-nerdtree-tabs'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'

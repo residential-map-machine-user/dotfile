@@ -2,7 +2,7 @@ let g:python3_host_prog = expand('$HOME') . '/.pyenv/shims/python'
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
 
-" dein
+" deinのホームディレクトリを$HOME/.cache/dein
 let s:dein_cache_dir = g:cache_home . '/dein'
 
 " reset augroup
@@ -11,52 +11,73 @@ augroup MyAutoCmd
 augroup END
 
 if &runtimepath !~# '/dein.vim'
+    "dein自体もpluginとしてdein配下に入れる
     let s:dein_repo_dir = s:dein_cache_dir . '/repos/github.com/Shougo/dein.vim'
-
     " Auto Download
     if !isdirectory(s:dein_repo_dir)
         call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
     endif
-" dein.vim をプラグインとして読み込む
+    " dein.vim をプラグインとして読み込む
     execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 if dein#load_state(s:dein_cache_dir)
     call dein#begin(s:dein_cache_dir)
-
     let s:toml_dir = g:config_home . '/dein'
-
+    "共通プラグイン
     call dein#load_toml(s:toml_dir . '/common.toml')
     call dein#add( 'leafgarland/typescript-vim', {
           \ 'autoload' :{
           \   'filetypes': ['typescript']
           \ }
           \})
+    "スニペットを導入
     call dein#add('Shougo/neosnippet')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('thinca/vim-quickrun')
-    " call dein#add ('marijnh/tern_for_vim', {
-    "       \ 'build': {
-    "       \   'others': 'npm install'
-    "       \}})
-    " call dein#add('neomake/neomake')
-    " autocmd! BufWritePost * Neomake " 保存時に実行する
-    " let g:neomake_javascript_enabled_makers = ['eslint']
-    
-    " call dein#add('benjie/neomake-local-eslint.vim')
-    
-    " let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
-    " let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
     if has('nvim')
-      " toml path is $HOME/.config/dein/dein.toml
+      "deinのプラグイン設定ファイル$HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
       call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
     else
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
-      call dein#add('kmnk/vim-unite-giti.git')
     endif
     if has('lua')
       call dein#load_toml(s:toml_dir . '/lua.toml')
       call dein#add('Shougo/neocomplete', {'on_i': 1})
+      let g:neocomplete#enable_at_startup = 1
+      let g:neocomplete#enable_smart_case = 1
+      let g:neocomplete#sources#syntax#min_keyword_length = 3
+      let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+      let g:neocomplete#sources#dictionary#dictionaries = {
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
+
+      " Define keyword.
+      if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+      endif
+      let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+      " Enable heavy omni completion.
+      if !exists('g:neocomplete#sources#omni#input_patterns')
+        let g:neocomplete#sources#omni#input_patterns = {}
+      endif
+      if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+      endif
+      let g:neocomplete#sources#omni#input_patterns.php =
+            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.c =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.cpp =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+      " For perlomni.vim setting.
+      " https://github.com/c9s/perlomni.vim
+      let g:neocomplete#sources#omni#input_patterns.perl =
+            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
     endif
     if !has('nvim') && !has('lua')
       call dein#add('Shougo/neocomplcache.vim')
@@ -94,18 +115,18 @@ if dein#load_state(s:dein_cache_dir)
     endif
     call dein#add('stephpy/vim-php-cs-fixer')
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
+    call dein#add('ctrlpvim/ctrlp.vim')
     call dein#end()
     call dein#save_state()
   endif
-
   if has('vim_starting') && dein#check_install()
     call dein#install()
   endif
 
-
 syntax on
 filetype plugin indent  on
 set wildmenu
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set history=1000
 set modifiable
 set write
@@ -140,14 +161,13 @@ set backspace=indent,eol,start
  if executable('ag')
    let g:unite_source_grep_command = 'ag'
    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
-   let g:unite_source_grep_max_candidates = 1000
+   let g:unite_source_grep_max_candidates = 200
    let g:unite_source_grep_recursive_opt = ''
-   let g:ctrlp_use_caching=0
-   let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g '
  endif
 
  "indent の高速化
 let g:indentLine_faster = 1
+
 "git gutterの設定
 function! MyGitGutter()
   if ! exists('*GitGutterGetHunkSummary')
@@ -171,8 +191,8 @@ function! MyGitGutter()
 endfunction
 
 "easy motionの設定
-nmap  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" nmap  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 
 " vimshell 設定
 " let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
@@ -182,7 +202,7 @@ omap / <Plug>(easymotion-tn)
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 let NERDTreeShowHidden=1
-let g:nerdtree_tabs_open_on_console_startup = 1
+" let g:nerdtree_tabs_open_on_console_startup = 1
 let g:NERDTreeMapOpenInTab = "o"
 
 "openbrowser
@@ -230,22 +250,6 @@ inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 nnoremap <C-t> :tabnew<CR>
 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -254,50 +258,32 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php =
-      \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-let g:neocomplete#sources#omni#input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-let g:neocomplete#sources#omni#input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl =
-      \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 "}}}
 " unite.vim"{{{
-let g:unite_enable_split_vertically = 0
-let g:unite_kind_file_cd_command = 'TabpageCD'
-let g:unite_kind_file_lcd_command = 'TabpageCD'
 
-let g:unite_source_history_yank_enable = 1
-
-let g:unite_winheight = 20
-let g:unite_winwidth = 78
-let g:unite_enable_start_insert = 0
-
-" For optimize.
-let g:unite_cursor_line_highlight = 'CursorLine'
-let g:unite_source_file_mru_filename_format = ':~:.'
-let g:unite_source_file_mru_limit = 300
-let g:unite_source_directory_mru_limit = 300
-
-" For ack.
-if executable('ack-grep')
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-"}}}
-"
+"ctrlp設定
+" CtrlPのウィンドウ最大高さ
+let g:ctrlp_max_height = 30
+" 無視するディレクトリ
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\v[\/](\.git|node_modules)$',
+\ 'file': '\v\.(exe|so|dll)$',
+\ 'link': 'some_bad_symbolic_links',
+\ }
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_map = '<c-u><c-u>'
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtBS()':              ['<bs>', '<c-]>'],
+  \ 'PrtDeleteWord()':      ['<c-w>'],
+  \ 'PrtClear()':           ['<c-u>'],
+  \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
+  \ 'PrtSelectMove("k")':   ['<c-p>', '<up>'],
+  \ 'PrtHistory(-1)':       ['<c-j>'],
+  \ 'PrtHistory(1)':        ['<c-k>'],
+  \ 'ToggleRegex()':        ['<c-r>'],
+  \ }
 "php fixer
 " If you use php-cs-fixer version 1.x
 let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
@@ -321,7 +307,7 @@ let g:php_cs_fixer_verbose = 0                    " Return the output of command
 nnoremap <silent><leader>php :call PhpCsFixerFixFile()<CR>
 
 "neocomplete-php
-let g:neocomplete_php_locale = 'ja'
+" let g:neocomplete_php_locale = 'ja'
 "" vim-quickrun {{{
 function! EslintFix() abort "{{{
     let l:quickrun_config_backup                  = g:quickrun_config['javascript']
@@ -377,7 +363,6 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let g:neosnippet#enable_snipmate_compatibility = 1
-
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
 " For conceal markers.
