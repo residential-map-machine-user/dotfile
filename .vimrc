@@ -150,8 +150,8 @@ set autoindent
 set smartindent
 set conceallevel=0
 " set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
-set completeopt+=noselect
-" set completeopt+=noinsert
+" set completeopt+=noselect
+set completeopt+=noinsert
 " set list
 " set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
