@@ -45,11 +45,11 @@ if dein#load_state(s:dein_cache_dir)
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
     if has('lua')
+      call dein#load_toml(s:toml_dir . '/lua.toml')
+      call dein#add('Shougo/neocomplete')
       let g:neocomplete#enable_at_startup = 1
       let g:neocomplete#enable_smart_case = 1
       let g:neocomplete#sources#syntax#min_keyword_length = 3
-      call dein#load_toml(s:toml_dir . '/lua.toml')
-      call dein#add('Shougo/neocomplete', {'on_i': 1})
       let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
       let g:neocomplete#sources#dictionary#dictionaries = {
@@ -70,17 +70,17 @@ if dein#load_state(s:dein_cache_dir)
       if !exists('g:neocomplete#force_omni_input_patterns')
         let g:neocomplete#force_omni_input_patterns = {}
       endif
-      let g:neocomplete#sources#omni#input_patterns.php =
-            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.c =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.cpp =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
+      let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+      let g:neocomplete#enable_auto_select = 1
+      " <C-h>, <BS>: close popup and delete backword char.
+       inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+       inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
       " For perlomni.vim setting.
       " https://github.com/c9s/perlomni.vim
-      let g:neocomplete#sources#omni#input_patterns.perl =
-            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
     endif
     if !has('nvim') && !has('lua')
       call dein#add('Shougo/neocomplcache.vim')
