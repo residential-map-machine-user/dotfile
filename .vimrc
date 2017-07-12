@@ -34,6 +34,9 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('Shougo/neosnippet')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('thinca/vim-quickrun')
+    call dein#add('stephpy/vim-php-cs-fixer')
+    call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('Shougo/vimfiler.vim')
     if has('nvim')
       "deinのプラグイン設定ファイル$HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
@@ -113,10 +116,6 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><C-y>  neocomplcache#close_popup()
       inoremap <expr><C-e>  neocomplcache#cancel_popup()
     endif
-    call dein#add('stephpy/vim-php-cs-fixer')
-    "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
-    call dein#add('ctrlpvim/ctrlp.vim')
-    call dein#add('Shougo/vimfiler.vim')
     call dein#end()
     call dein#save_state()
   endif
@@ -152,6 +151,7 @@ set smartindent
 set conceallevel=0
 " set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
 set completeopt+=noselect
+" set completeopt+=noinsert
 " set list
 " set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
