@@ -35,4 +35,3 @@ source $ZSH/oh-my-zsh.sh
 
 #shellscript の実行
 export TERM='xterm-256color'
-tmux

@@ -42,11 +42,11 @@ if dein#load_state(s:dein_cache_dir)
       call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
     endif
     if has('lua')
-      call dein#load_toml(s:toml_dir . '/lua.toml')
-      call dein#add('Shougo/neocomplete', {'on_i': 1})
       let g:neocomplete#enable_at_startup = 1
       let g:neocomplete#enable_smart_case = 1
       let g:neocomplete#sources#syntax#min_keyword_length = 3
+      call dein#load_toml(s:toml_dir . '/lua.toml')
+      call dein#add('Shougo/neocomplete', {'on_i': 1})
       let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
       let g:neocomplete#sources#dictionary#dictionaries = {
@@ -116,6 +116,7 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('stephpy/vim-php-cs-fixer')
     "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
     call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('Shougo/vimfiler.vim')
     call dein#end()
     call dein#save_state()
   endif
@@ -141,6 +142,7 @@ set number
 set ruler
 set laststatus=2
 set showcmd
+set noswapfile
 " set incsearch
 set ignorecase
 set title
@@ -148,7 +150,7 @@ set noshowmode
 set autoindent
 set smartindent
 set conceallevel=0
-set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
+" set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
 set completeopt+=noselect
 " set list
 " set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
@@ -200,11 +202,11 @@ endfunction
 " nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
 
 "nerdtree設定
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-let NERDTreeShowHidden=1
-" let g:nerdtree_tabs_open_on_console_startup = 1
-let g:NERDTreeMapOpenInTab = "o"
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" let NERDTreeShowHidden=1
+" " let g:nerdtree_tabs_open_on_console_startup = 1
+" let g:NERDTreeMapOpenInTab = "o"
 
 "openbrowser
 nmap <Leader>o <Plug>(openbrowser-smart-search)
@@ -223,11 +225,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 "vimfilerの設定
-" let g:vimfiler_as_default_explorer  = 1
-" let g:vimfiler_safe_mode_by_default = 0
-" let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
-" nnoremap <silent><C-u><C-j> :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit -toggle<CR>
-nnoremap <Leader>v :NERDTreeToggle<CR>
+let g:vimfiler_as_default_explorer  = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
+nnoremap <silent><C-u><C-j> :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit -toggle<CR>
+nnoremap <Leader>v :VimFilerExplorer<CR>
+" nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
 imap <C-e>, <plug>(emmet-expand-abbr)
