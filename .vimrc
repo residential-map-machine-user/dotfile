@@ -34,7 +34,7 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('Shougo/neosnippet')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('thinca/vim-quickrun')
-    call dein#add('stephpy/vim-php-cs-fixer')
+    call dein#add('y-matsuyama/vim-php-cs-fixer')
     call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('Shougo/vimfiler.vim')
     if has('nvim')
@@ -289,24 +289,16 @@ let g:ctrlp_prompt_mappings = {
   \ 'ToggleRegex()':        ['<c-r>'],
   \ }
 "php fixer
-" If you use php-cs-fixer version 1.x
-let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
-let g:php_cs_fixer_config = "default"                  " options: --config
-" If you want to define specific fixers:
-"let g:php_cs_fixer_fixers_list = "linefeed,short_tag" " options: --fixers
-"let g:php_cs_fixer_config_file = '.php_cs'            " options: --config-file
-" End of php-cs-fixer version 1 config params
-
 " If you use php-cs-fixer version 2.x
 let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
-"let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
-"let g:php_cs_fixer_config_file = '.php_cs' " options: --config
+" let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
+let g:php_cs_fixer_config_file = '$HOME/dotfile/.php_cs' " options: --config
 " End of php-cs-fixer version 2 config params
 
 let g:php_cs_fixer_php_path = "php"               " Path to PHP
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
+" let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 1                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 1                    " Return the output of command if 1, else an inline information.
 " nnoremap <silent><leader>php :call PhpCsFixerFixDirectory()<CR>
 nnoremap <silent><leader>php :call PhpCsFixerFixFile()<CR>
 
