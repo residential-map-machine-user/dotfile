@@ -42,7 +42,7 @@ if dein#load_state(s:dein_cache_dir)
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
       call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
     else
-      call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
+      call dein#load_toml(s:toml_dir . '/unite.toml')
     endif
     if has('lua')
       call dein#load_toml(s:toml_dir . '/lua.toml')
