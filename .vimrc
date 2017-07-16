@@ -34,16 +34,19 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('Shougo/neosnippet')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('thinca/vim-quickrun')
+    call dein#add('y-matsuyama/vim-php-cs-fixer')
+    call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('Shougo/vimfiler.vim')
     if has('nvim')
       "deinのプラグイン設定ファイル$HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
       call dein#load_toml(s:toml_dir . '/denite_plugin.toml', {'lazy': 1})
     else
-      call dein#load_toml(s:toml_dir . '/unite.toml', {'lazy': 1})
+      call dein#load_toml(s:toml_dir . '/unite.toml')
     endif
     if has('lua')
       call dein#load_toml(s:toml_dir . '/lua.toml')
-      call dein#add('Shougo/neocomplete', {'on_i': 1})
+      call dein#add('Shougo/neocomplete')
       let g:neocomplete#enable_at_startup = 1
       let g:neocomplete#enable_smart_case = 1
       let g:neocomplete#sources#syntax#min_keyword_length = 3
@@ -67,17 +70,17 @@ if dein#load_state(s:dein_cache_dir)
       if !exists('g:neocomplete#force_omni_input_patterns')
         let g:neocomplete#force_omni_input_patterns = {}
       endif
-      let g:neocomplete#sources#omni#input_patterns.php =
-            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.c =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.cpp =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
+      let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      let g:neocomplete#sources#omni#input_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+      let g:neocomplete#enable_auto_select = 1
+      " <C-h>, <BS>: close popup and delete backword char.
+       inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+       inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
       " For perlomni.vim setting.
       " https://github.com/c9s/perlomni.vim
-      let g:neocomplete#sources#omni#input_patterns.perl =
-            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
     endif
     if !has('nvim') && !has('lua')
       call dein#add('Shougo/neocomplcache.vim')
@@ -113,9 +116,6 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><C-y>  neocomplcache#close_popup()
       inoremap <expr><C-e>  neocomplcache#cancel_popup()
     endif
-    call dein#add('stephpy/vim-php-cs-fixer')
-    "TODO vimshellとvimprocはOS依存するのでwindowsの場合は外す
-    call dein#add('ctrlpvim/ctrlp.vim')
     call dein#end()
     call dein#save_state()
   endif
@@ -141,6 +141,7 @@ set number
 set ruler
 set laststatus=2
 set showcmd
+set noswapfile
 " set incsearch
 set ignorecase
 set title
@@ -148,13 +149,15 @@ set noshowmode
 set autoindent
 set smartindent
 set conceallevel=0
-set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
+" set completeopt+=noinsert "vimの保管をinsertで始めるかselectで始めるかの設定が存在す"
 " set completeopt+=noselect
+set completeopt+=noinsert
 " set list
 " set listchars=tab:>.,trail:.,extends:>,precedes:<,nbsp:%
 set directory=~/.vim/
 set undodir=~/.vim/
 set backspace=indent,eol,start
+set hlsearch
 "deocompleteの設定
 " let g:deoplete#enable_at_startup = 1
 "unite
@@ -199,11 +202,11 @@ endfunction
 " nnoremap <silent> <C-u><C-t> :<C-u>VimShell<CR>
 
 "nerdtree設定
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-let NERDTreeShowHidden=1
-" let g:nerdtree_tabs_open_on_console_startup = 1
-let g:NERDTreeMapOpenInTab = "o"
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" let NERDTreeShowHidden=1
+" " let g:nerdtree_tabs_open_on_console_startup = 1
+" let g:NERDTreeMapOpenInTab = "o"
 
 "openbrowser
 nmap <Leader>o <Plug>(openbrowser-smart-search)
@@ -222,11 +225,11 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 "vimfilerの設定
-" let g:vimfiler_as_default_explorer  = 1
-" let g:vimfiler_safe_mode_by_default = 0
-" let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
-" nnoremap <silent><C-u><C-j> :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit -toggle<CR>
-nnoremap <Leader>v :NERDTreeToggle<CR>
+let g:vimfiler_as_default_explorer  = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
+nnoremap <silent> <Leader>v :<C-u>VimFilerBufferDir -quit<CR>
+" nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
 imap <C-e>, <plug>(emmet-expand-abbr)
@@ -285,24 +288,16 @@ let g:ctrlp_prompt_mappings = {
   \ 'ToggleRegex()':        ['<c-r>'],
   \ }
 "php fixer
-" If you use php-cs-fixer version 1.x
-let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
-let g:php_cs_fixer_config = "default"                  " options: --config
-" If you want to define specific fixers:
-"let g:php_cs_fixer_fixers_list = "linefeed,short_tag" " options: --fixers
-"let g:php_cs_fixer_config_file = '.php_cs'            " options: --config-file
-" End of php-cs-fixer version 1 config params
-
 " If you use php-cs-fixer version 2.x
 let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
-"let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
-"let g:php_cs_fixer_config_file = '.php_cs' " options: --config
+" let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
+let g:php_cs_fixer_config_file = '$HOME/dotfile/.php_cs' " options: --config
 " End of php-cs-fixer version 2 config params
 
 let g:php_cs_fixer_php_path = "php"               " Path to PHP
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
+" let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 1                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 1                    " Return the output of command if 1, else an inline information.
 " nnoremap <silent><leader>php :call PhpCsFixerFixDirectory()<CR>
 nnoremap <silent><leader>php :call PhpCsFixerFixFile()<CR>
 
@@ -369,3 +364,5 @@ let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+autocmd BufNewFile,BufRead *.twig set filetype=html
