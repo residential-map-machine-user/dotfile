@@ -47,7 +47,7 @@ if dein#load_state(s:dein_cache_dir)
     if has('lua')
       call dein#load_toml(s:toml_dir . '/lua.toml')
       call dein#add('Shougo/neocomplete')
-      let g:neocomplete#data_directory = s:dein_cache_dir . "neocomplete"
+      let g:neocomplete#data_directory = g:cache_home . "neocomplete"
       let g:neocomplete#enable_at_startup = 1
       let g:neocomplete#enable_smart_case = 1
       let g:neocomplete#sources#syntax#min_keyword_length = 3
@@ -55,8 +55,6 @@ if dein#load_state(s:dein_cache_dir)
 
       let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'default' : '',
-            \ 'vimshell' : $HOME.'/.vimshell_hist',
-            \ 'scheme' : $HOME.'/.gosh_completions'
             \ }
 
       " Define keyword.
@@ -65,21 +63,27 @@ if dein#load_state(s:dein_cache_dir)
       endif
       let g:neocomplete#keyword_patterns['default'] = '\h\w*'
       " Enable heavy omni completion.
-      if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
-      endif
-      if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-      endif
-      let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-      let g:neocomplete#sources#omni#input_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      " if !exists('g:neocomplete#sources#omni#input_patterns')
+      "   let g:neocomplete#sources#omni#input_patterns = {}
+      " endif
+      " if !exists('g:neocomplete#force_omni_input_patterns')
+      "   let g:neocomplete#force_omni_input_patterns = {}
+      " endif
+      " let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      " let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+      " let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+      " let g:neocomplete#sources#omni#input_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
       inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-      let g:neocomplete#enable_auto_select = 1
+      let g:neocomplete#enable_auto_select = 0
       " <C-h>, <BS>: close popup and delete backword char.
       inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
       inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+      " Enable omni completion.
+      " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+      " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+      " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+      " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+      " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
       autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup"
       " For perlomni.vim setting.
       " https://github.com/c9s/perlomni.vim
@@ -94,7 +98,7 @@ if dein#load_state(s:dein_cache_dir)
       let g:neocomplcache_enable_smart_case = 1
       " Set minimum syntax keyword length.
       let g:neocomplcache_min_syntax_length = 3
-      let g:neocomplcache_temporary_dir = s:dein_cache_dir . "/neocomplcache"
+      let g:neocomplcache_temporary_dir = g:cache_home . "/neocomplcache"
       let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
       " Define dictionary.
@@ -258,12 +262,6 @@ inoremap <C-h> <Left>
 nnoremap <C-t> :tabnew<CR>
 
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 "}}}
 " unite.vim"{{{
@@ -295,7 +293,7 @@ let g:ctrlp_prompt_mappings = {
 " If you use php-cs-fixer version 2.x
 let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
 " let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
-let g:php_cs_fixer_config_file = '$HOME/dotfile/.php_cs' " options: --config
+let g:php_cs_fixer_config_file = $HOME . '/dotfile/.php_cs' " options: --config
 " End of php-cs-fixer version 2 config params
 
 let g:php_cs_fixer_php_path = "php"               " Path to PHP
