@@ -94,6 +94,7 @@ if dein#load_state(s:dein_cache_dir)
       let g:neocomplcache_enable_smart_case = 1
       " Set minimum syntax keyword length.
       let g:neocomplcache_min_syntax_length = 3
+      let g:neocomplcache_temporary_dir = s:dein_cache_dir . "/neocomplcache"
       let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
       " Define dictionary.
@@ -117,6 +118,7 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
       inoremap <expr><C-y>  neocomplcache#close_popup()
       inoremap <expr><C-e>  neocomplcache#cancel_popup()
+      autocmd VimEnter * NeoComplCacheEnable " Enable NeoComplete at startup"
     endif
     call dein#end()
     call dein#save_state()
