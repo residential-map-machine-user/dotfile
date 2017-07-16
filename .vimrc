@@ -228,7 +228,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
-nnoremap <Leader>v :VimFiler -split -simple -winwidth=35 -no-quit<CR>
+nnoremap <silent> <Leader>v :<C-u>VimFilerBufferDir -quit<CR>
 " nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
