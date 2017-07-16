@@ -45,7 +45,6 @@ if dein#load_state(s:dein_cache_dir)
       call dein#load_toml(s:toml_dir . '/unite.toml')
     endif
     if has('lua')
-      call dein#load_toml(s:toml_dir . '/lua.toml')
       call dein#add('Shougo/neocomplete')
       let g:neocomplete#data_directory = g:cache_home . "neocomplete"
       let g:neocomplete#enable_at_startup = 1
