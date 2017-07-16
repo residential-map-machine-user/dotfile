@@ -122,7 +122,6 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
       inoremap <expr><C-y>  neocomplcache#close_popup()
       inoremap <expr><C-e>  neocomplcache#cancel_popup()
-      autocmd VimEnter * NeoComplCacheEnable " Enable NeoComplete at startup"
     endif
     call dein#end()
     call dein#save_state()
@@ -367,3 +366,4 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
+autocmd VimEnter * NeoComplCacheEnable " Enable NeoComplete at startup"
