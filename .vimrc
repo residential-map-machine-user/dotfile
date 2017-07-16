@@ -37,6 +37,8 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('y-matsuyama/vim-php-cs-fixer')
     call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('Shougo/vimfiler.vim')
+    call dein#add('Quramy/tsuquyomi')
+    call dein#add('nishigori/vim-php-dictionary', {'on_ft': 'php', 'rev': 'php7.1'})
     if has('nvim')
       "deinのプラグイン設定ファイル$HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
@@ -54,6 +56,7 @@ if dein#load_state(s:dein_cache_dir)
 
       let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'default' : '',
+            \ 'php' : s:dein_cache_dir . '/repos/github.com/nishigori/vim-php-dictionary/dict/PHP.dict'
             \ }
 
       " Define keyword.
@@ -83,7 +86,6 @@ if dein#load_state(s:dein_cache_dir)
       " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
       " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
       " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-      autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup"
       " For perlomni.vim setting.
       " https://github.com/c9s/perlomni.vim
     endif
@@ -103,6 +105,7 @@ if dein#load_state(s:dein_cache_dir)
       " Define dictionary.
       let g:neocomplcache_dictionary_filetype_lists = {
             \ 'default' : ''
+            \ 'php' : s:dein_cache_dir . '/repos/github.com/nishigori/vim-php-dictionary/dict/PHP.dict'
             \ }
       " Plugin key-mappings.
       inoremap <expr><C-g>     neocomplcache#undo_completion()
@@ -366,3 +369,4 @@ if has('conceal')
 endif
 
 autocmd VimEnter * NeoComplCacheEnable " Enable NeoComplete at startup"
+autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup"
