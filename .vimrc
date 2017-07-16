@@ -47,6 +47,7 @@ if dein#load_state(s:dein_cache_dir)
     if has('lua')
       call dein#load_toml(s:toml_dir . '/lua.toml')
       call dein#add('Shougo/neocomplete')
+      let g:neocomplete#data_directory = s:dein_cache_dir . "neocomplete"
       let g:neocomplete#enable_at_startup = 1
       let g:neocomplete#enable_smart_case = 1
       let g:neocomplete#sources#syntax#min_keyword_length = 3
@@ -77,8 +78,9 @@ if dein#load_state(s:dein_cache_dir)
       inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
       let g:neocomplete#enable_auto_select = 1
       " <C-h>, <BS>: close popup and delete backword char.
-       inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-       inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+      inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+      inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+      autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup"
       " For perlomni.vim setting.
       " https://github.com/c9s/perlomni.vim
     endif
@@ -228,7 +230,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:vimfiler_as_default_explorer  = 1
 let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_data_directory       = expand('~/.vim/etc/vimfiler')
-nnoremap <silent> <Leader>v :<C-u>VimFilerBufferDir -quit<CR>
+nnoremap <silent> <Leader>v :<C-u>VimFilerExplorer<CR>
 " nnoremap <Leader>v :NERDTreeToggle<CR>
 
 
@@ -365,4 +367,3 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-autocmd BufNewFile,BufRead *.twig set filetype=html
