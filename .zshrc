@@ -35,3 +35,11 @@ source $ZSH/oh-my-zsh.sh
 
 #shellscript の実行
 export TERM='xterm-256color'
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
+zle -N select-history
+bindkey '^r' select-history
