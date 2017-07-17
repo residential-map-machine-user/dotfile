@@ -92,6 +92,9 @@ fgco() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
+fssh() {
+  ag '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | xargs -o ssh
+}
 fstash() {
   local out q k sha
   while out=$(
