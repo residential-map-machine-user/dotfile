@@ -7,21 +7,6 @@ alias search="find . -type f -print | xargs grep --color=auto -n "
 plugins=(git)
 #schemeの設定
 # 以下はお好みでカスタマイズ！
-setopt auto_menu
-setopt auto_pushd
-setopt complete_aliases
-setopt extended_glob
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_no_store
-setopt hist_save_no_dups
-setopt list_packed
-setopt nolistbeep
-setopt nonomatch
-setopt notify
-setopt pushd_ignore_dups
-setopt share_history
-setopt transient_rprompt
 #環境変数
 export PATH=$PATH:$GOPATH/bin
 export PYENV_ROOT=$HOME/.pyenv
@@ -141,11 +126,9 @@ fdocker() {
     )
   fi
 }
-[ -n "$BASH" ] && complete -F _fzf_complete_docker -o default -o bashdefault docker
 case ${OSTYPE} in
   darwin*)
     export GOPATH=$HOME/.go
-    source $ZSH/oh-my-zsh.sh
     eval "$(rbenv init -)"
     eval "$(phpenv init -)"
     eval "$(pyenv init -)"
@@ -155,6 +138,7 @@ case ${OSTYPE} in
     POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
     POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
     ZSH_THEME="powerlevel9k/powerlevel9k"
+    source $ZSH/oh-my-zsh.sh
     # ここに Mac 向けの設定
     ;;
   linux*)
