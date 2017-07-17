@@ -56,7 +56,7 @@ if dein#load_state(s:dein_cache_dir)
 
       let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'default' : '',
-            \ 'php' : s:dein_cache_dir . '/repos/github.com/nishigori/vim-php-dictionary/dict/PHP.dict'
+            \ 'php' : g:cache_home  . '/dein/repos/github.com/nishigori/vim-php-dictionary/dict/PHP.dict',
             \ }
 
       " Define keyword.
@@ -104,8 +104,8 @@ if dein#load_state(s:dein_cache_dir)
 
       " Define dictionary.
       let g:neocomplcache_dictionary_filetype_lists = {
-            \ 'default' : ''
-            \ 'php' : s:dein_cache_dir . '/repos/github.com/nishigori/vim-php-dictionary/dict/PHP.dict'
+            \ 'default' : '',
+            \ 'php' : g:cache_home  . '/dein/repos/github.com/nishigori/vim-php-dictionary/dict/PHP.dict',
             \ }
       " Plugin key-mappings.
       inoremap <expr><C-g>     neocomplcache#undo_completion()
