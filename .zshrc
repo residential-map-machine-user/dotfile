@@ -19,8 +19,7 @@ export PYENV_ROOT=$HOME/.pyenv
 export XDG_CONFIG_HOME=$HOME/.config
 export ZSH=$HOME/.oh-my-zsh
 #localにinstall際に必要tmux
-export LD_LIBRARY_PATH=${HOME}/local/lib:$LD_LIBRARY_PATH
-PATH=/usr/local/sbin::/Users/$USER/.nodebrew/current/bin:/usr/local/bin:/Users/$USER/.mongodb/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Postgres.app/Contents/Versions/9.5/bin:$PYENV_ROOT/bin:HOME/.pyenv/shims:HOME/android-ndk-r10e:$HOME/.nodebrew/current/bin:$HOME/local/bin/:$PATH
+export LD_LIBRARY_PATH=${HOME}/local/lib:$LD_LIBRARY_PATH PATH=/usr/local/sbin::/Users/$USER/.nodebrew/current/bin:/usr/local/bin:/Users/$USER/.mongodb/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Postgres.app/Contents/Versions/9.5/bin:$PYENV_ROOT/bin:HOME/.pyenv/shims:HOME/android-ndk-r10e:$HOME/.nodebrew/current/bin:$HOME/local/bin/:$PATH
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.phpenv/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
@@ -41,15 +40,15 @@ fhistory() {
 zle -N fh
 bindkey '^r' fh
 
-function fselect-dir() {
+function fcd() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
 
-zle -N fselect-dir
-bindkey '^u' fselect-dir
+zle -N fcd
+bindkey '^u' fcd
 
 fchrome() {
   local cols sep google_history open
