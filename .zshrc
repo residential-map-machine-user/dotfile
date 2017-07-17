@@ -34,7 +34,7 @@ source $ZSH/oh-my-zsh.sh
 
 #shellscript の実行
 export TERM='xterm-256color'
-fhistory() {
+fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 zle -N fh

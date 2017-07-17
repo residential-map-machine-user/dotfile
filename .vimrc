@@ -39,6 +39,7 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('Shougo/vimfiler.vim')
     call dein#add('Quramy/tsuquyomi')
     call dein#add('nishigori/vim-php-dictionary', {'on_ft': 'php', 'rev': 'php7.1'})
+    call dein#add('ekalinin/Dockerfile.vim')
     if has('nvim')
       "deinのプラグイン設定ファイル$HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
@@ -362,7 +363,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory= $HOME . '/.cache/neosnippet/'
+let g:neosnippet#snippets_directory= '~/.config/dein/neosnippet'
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
