@@ -41,5 +41,3 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
-zle -N select-history
-bindkey '^r' select-history
