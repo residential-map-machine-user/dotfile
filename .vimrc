@@ -40,6 +40,7 @@ if dein#load_state(s:dein_cache_dir)
     call dein#add('Quramy/tsuquyomi')
     call dein#add('nishigori/vim-php-dictionary', {'on_ft': 'php', 'rev': 'php7.1'})
     call dein#add('ekalinin/Dockerfile.vim')
+    call dein#add('evidens/vim-twig')
     if has('nvim')
       "deinのプラグイン設定ファイル$HOME/.config/dein/dein.toml
       call dein#load_toml(s:toml_dir . '/denite.toml', {'lazy': 1})
