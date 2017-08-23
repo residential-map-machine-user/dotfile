@@ -278,6 +278,7 @@ let g:ctrlp_custom_ignore = {
 \ 'file': '\v\.(exe|so|dll)$',
 \ 'link': 'some_bad_symbolic_links',
 \ }
+let g:ctrlp_types = ['mru', 'fil']
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_clear_cache_on_exit = 0
